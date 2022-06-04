@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class DetalleNegocioFactory extends Factory
 {
@@ -14,7 +15,8 @@ class DetalleNegocioFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'telefono'=>$this->faker->unique()->e164PhoneNumber,
+            'redes_sociales'=>$this->faker->unique()->word,
         ];
     }
 }

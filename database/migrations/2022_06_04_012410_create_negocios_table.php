@@ -14,8 +14,24 @@ class CreateNegociosTable extends Migration
     public function up()
     {
         Schema::create('negocios', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('_id');
+            $table->string('nombre_negocio');
+            $table->string('descripcion');
+            $table->string('hora_atencion');
+            $table->string('pais');
+            $table->string('ciudad');
+            $table->string('direccion');
+            $table->string('imagen_portada');
+            $table->string('imagen_negocio');
+
+            $table->id('categorias_id');
+            $table->id('usuario_id');
+            $table->foreign('categorias_id')->references('_id')->on('categorias');
+            $table->foreign('usuario_id')->references('_id')->on('usuarios');
+
+            $table->string('correo_electronico');
+            $table->string('fecha_creacion');
+            $table->string('fecha_actualizacion');
         });
     }
 
