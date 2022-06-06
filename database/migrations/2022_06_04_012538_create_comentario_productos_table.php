@@ -14,7 +14,12 @@ class CreateComentarioProductosTable extends Migration
     public function up()
     {
         Schema::create('comentario_productos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('review_producto_id');
+            $table->unsignedBigInteger('usuario');
+            $table->foreign('usuario')->references('usuario_id')->on('usuarios');
+            $table->smallInteger('valoracion');
+            $table->mediumText('texto_comentario');
+            $table->text('imagenes');
             $table->timestamps();
         });
     }
