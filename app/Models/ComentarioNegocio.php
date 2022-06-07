@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class comentarioNegocio extends Eloquent
+class ComentarioNegocio extends Eloquent
 {
     use HasFactory;
     protected $fillable = [
