@@ -14,7 +14,7 @@ class CreateComentarioNegociosTable extends Migration
     public function up()
     {
         Schema::create('comentario_negocios', function (Blueprint $table) {
-            $table->bigIncrements('review_negocio_id');
+            $table->id();
             $table->unsignedBigInteger('usuario');
             $table->foreign('usuario')->references('usuario_id')->on('usuarios');
             $table->smallInteger('valoracion');
