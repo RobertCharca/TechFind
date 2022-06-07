@@ -14,7 +14,13 @@ class UsuarioFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre' => $this->faker->name(),
+            'apellidos' => $this->faker->lastName(),
+            'nombre_usuarios' => $this->faker->userName(),
+            'email' => $this->faker->email(),
+            'password' => $this->faker->password,
+            'pais' => $this->faker->country(),
+            'ciudad' => $this->faker->city(),
         ];
     }
 }
