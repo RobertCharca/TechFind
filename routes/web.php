@@ -20,3 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/productos', [App\Http\Controllers\ProductoController::class, 'index']);
+Route::get('/productos/create', [App\Http\Controllers\ProductoController::class, 'create']);
+
+Route::post('/productos/insert', [App\Http\Controllers\ProductoController::class, 'insert']);
+Route::get('/productos/{id}/edit', [App\Http\Controllers\ProductoController::class, 'edit']);
+Route::post('/productos/update/{id}', [App\Http\Controllers\ProductoController::class, 'update']);
+Route::get('/productos/{id}/delete', [App\Http\Controllers\ProductoController::class, 'delete']);
