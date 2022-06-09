@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
 
-class detalleNegocio extends MongoModel
+class DetalleNegocio extends MongoModel
 {
     use HasFactory;
     protected $fillable = [
