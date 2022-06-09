@@ -15,6 +15,11 @@ class CreateComentarioNegociosTable extends Migration
     {
         Schema::create('comentario_negocios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('usuario');
+            $table->foreign('usuario')->references('usuario_id')->on('usuarios');
+            $table->smallInteger('valoracion');
+            $table->mediumText('texto_comentario');
+            $table->text('imagenes');
             $table->timestamps();
         });
     }
