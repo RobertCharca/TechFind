@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         ]);
         // \App\Models\User::factory(10)->create();
         \App\Models\Negocio::factory(10)->create();
-        \App\Models\detalleNegocio::factory(10)->create();
+        \App\Models\DetalleNegocio::factory(10)->create();
 
         /*
         $this->call([
