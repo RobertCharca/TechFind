@@ -33,3 +33,15 @@ Route::post('categorias/insert', [App\Http\Controllers\CategoriaController::clas
 Route::get('/categorias/{id}/edit', [App\Http\Controllers\CategoriaController::class, 'edit']);
 Route::post('/categorias/update/{id}', [App\Http\Controllers\CategoriaController::class, 'update']);
 Route::get('/categorias/{id}/delete', [App\Http\Controllers\CategoriaController::class, 'delete']);
+
+//Usuario
+Route::get('/usuario', [App\Http\Controllers\UsuarioController::class, 'index']);
+
+Route::get('/usuario/agregarUsuario', [App\Http\Controllers\UsuarioController::class, 'agregarUsuario']);
+Route::post('/usuario/insertarUsuario', [App\Http\Controllers\UsuarioController::class, 'insertarUsuario']);
+
+Route::get('/usuario/{id}/actualizarUsuario', [App\Http\Controllers\UsuarioController::class, 'actualizarUsuario']);
+Route::post('/usuario/updateUsuario/{id}', [App\Http\Controllers\UsuarioController::class, 'updateUsuario']);
+
+Route::get('/usuario/{id}/eliminarUsuario', [App\Http\Controllers\UsuarioController::class, 'eliminarUsuario']);
+
