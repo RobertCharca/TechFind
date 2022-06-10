@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ComentarioNegocioSeeder::class,
             ComentarioProductoSeeder::class,
+            DetalleProductoSeeder::class,
+            ProductoSeeder::class,
+            CategoriaSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
         \App\Models\Negocio::factory(10)->create();
