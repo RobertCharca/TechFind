@@ -9,4 +9,7 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
 class Categoria extends MongoModel
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre_categoria',
+    ];
 }

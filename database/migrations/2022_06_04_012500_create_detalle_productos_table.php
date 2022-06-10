@@ -16,6 +16,9 @@ class CreateDetalleProductosTable extends Migration
         Schema::create('detalle_productos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->number('producto_id');
+            $table->number('categoria_id');
+            $table->string('imagenes');
         });
     }
 

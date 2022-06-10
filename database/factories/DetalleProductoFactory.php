@@ -14,7 +14,9 @@ class DetalleProductoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'producto_id'=>$this->faker->numberBetween(1,10000),
+            'categoria_id'=>$this->faker->numberBetween(1,10000),
+            'imagenes'=>$this->faker->imageUrl(),
         ];
     }
 }
