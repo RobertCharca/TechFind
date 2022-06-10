@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+
 class ProductoFactory extends Factory
 {
     /**
@@ -14,7 +15,10 @@ class ProductoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre_producto'=>$this->faker->name,
+            'descripcion'=>$this->faker->text($maxNbChars = 200),
+            'fecha_creacion'=>$this->faker->iso8601($max = 'now'),
+            'negocio_id'=>$this->faker->numberBetween(1,10000),
         ];
     }
 }

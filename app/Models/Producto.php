@@ -10,4 +10,10 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
 class Producto extends MongoModel
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre_producto',
+        'descripcion',
+        'fecha_creacion',
+        'negocio_id',
+    ];
 }
