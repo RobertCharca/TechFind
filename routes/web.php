@@ -20,3 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Usuario
+Route::get('/usuario', [App\Http\Controllers\UsuarioController::class, 'index']);
+
+Route::get('/usuario/agregarUsuario', [App\Http\Controllers\UsuarioController::class, 'agregarUsuario']);
+Route::post('/usuario/insertarUsuario', [App\Http\Controllers\UsuarioController::class, 'insertarUsuario']);
+
+Route::get('/usuario/{id}/actualizarUsuario', [App\Http\Controllers\UsuarioController::class, 'actualizarUsuario']);
+Route::post('/usuario/updateUsuario/{id}', [App\Http\Controllers\UsuarioController::class, 'updateUsuario']);
+
+Route::get('/usuario/{id}/eliminarUsuario', [App\Http\Controllers\UsuarioController::class, 'eliminarUsuario']);
