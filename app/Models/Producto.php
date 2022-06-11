@@ -13,7 +13,6 @@ class Producto extends MongoModel
     protected $fillable = [
         'nombre_producto',
         'descripcion',
-        'fecha_creacion',
         'negocio_id',
     ];
 }
