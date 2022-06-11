@@ -17,7 +17,6 @@ class ProductoFactory extends Factory
         return [
             'nombre_producto'=>$this->faker->name,
             'descripcion'=>$this->faker->text($maxNbChars = 200),
-            'fecha_creacion'=>$this->faker->iso8601($max = 'now'),
             'negocio_id'=>$this->faker->numberBetween(1,10000),
         ];
     }
