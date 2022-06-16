@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Productos
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/productos', [App\Http\Controllers\ProductoController::class, 'index']);
 Route::get('/productos/create', [App\Http\Controllers\ProductoController::class, 'create']);
@@ -27,6 +28,7 @@ Route::get('/productos/{id}/edit', [App\Http\Controllers\ProductoController::cla
 Route::post('/productos/update/{id}', [App\Http\Controllers\ProductoController::class, 'update']);
 Route::get('/productos/{id}/delete', [App\Http\Controllers\ProductoController::class, 'delete']);
 
+//Categorias
 Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index']);
 Route::get('categorias/create', [App\Http\Controllers\CategoriaController::class, 'create']);
 Route::post('categorias/insert', [App\Http\Controllers\CategoriaController::class, 'insert']);
@@ -45,3 +47,6 @@ Route::post('/usuario/updateUsuario/{id}', [App\Http\Controllers\UsuarioControll
 
 Route::get('/usuario/{id}/eliminarUsuario', [App\Http\Controllers\UsuarioController::class, 'eliminarUsuario']);
 
+//Datos del usuario exportado en pdf y excel
+Route::get('usuario/export/', [App\Http\Controllers\UsuarioController::class, 'export']);
+Route::get('usuario/pdf/', [App\Http\Controllers\UsuarioController::class, 'createPDF']);
