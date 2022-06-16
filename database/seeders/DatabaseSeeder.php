@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        /*
         $this->call([
             UserSeeder::class,
             ComentarioNegocioSeeder::class,
@@ -21,10 +22,10 @@ class DatabaseSeeder extends Seeder
             DetalleProductoSeeder::class,
             ProductoSeeder::class,
             CategoriaSeeder::class,
-        ]);
+        ]);*/
         // \App\Models\User::factory(10)->create();
         \App\Models\Negocio::factory(10)->create();
-        \App\Models\DetalleNegocio::factory(10)->create();
+        //\App\Models\DetalleNegocio::factory(10)->create();
 
         /*
         $this->call([

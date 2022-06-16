@@ -36,12 +36,19 @@ Route::get('/categorias/{id}/delete', [App\Http\Controllers\CategoriaController:
 
 //Usuario
 Route::get('/usuario', [App\Http\Controllers\UsuarioController::class, 'index']);
-
 Route::get('/usuario/agregarUsuario', [App\Http\Controllers\UsuarioController::class, 'agregarUsuario']);
 Route::post('/usuario/insertarUsuario', [App\Http\Controllers\UsuarioController::class, 'insertarUsuario']);
-
 Route::get('/usuario/{id}/actualizarUsuario', [App\Http\Controllers\UsuarioController::class, 'actualizarUsuario']);
 Route::post('/usuario/updateUsuario/{id}', [App\Http\Controllers\UsuarioController::class, 'updateUsuario']);
-
 Route::get('/usuario/{id}/eliminarUsuario', [App\Http\Controllers\UsuarioController::class, 'eliminarUsuario']);
 
+Route::get('/negocios', [App\Http\Controllers\NegocioController::class, 'index']);
+Route::get('/negocios/create', [App\Http\Controllers\NegocioController::class, 'create']);
+Route::post('/negocios/insert', [App\Http\Controllers\NegocioController::class, 'insert']);
+Route::get('/negocios/{id}/edit', [App\Http\Controllers\NegocioController::class, 'edit']);
+Route::post('/negocios/update/{id}', [App\Http\Controllers\NegocioController::class, 'update']);
+Route::get('/negocios/{id}/delete', [App\Http\Controllers\NegocioController::class, 'delete']);
+Route::get('/negocios/export/', [App\Http\Controllers\NegocioController::class, 'export']);
+Route::get('/negocios/exportPDF/', [App\Http\Controllers\NegocioController::class, 'exportPDF']);
+
+Route::get('/categorias/prueba', [App\Http\Controllers\CategoriaController::class, 'prueba']);

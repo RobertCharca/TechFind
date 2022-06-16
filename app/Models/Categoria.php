@@ -12,4 +12,8 @@ class Categoria extends MongoModel
     protected $fillable = [
         'nombre_categoria',
     ];
+
+    public function negocios(){
+        return $this->hasMany(Negocio::class,'categoria_id','_id');
+    }
 }

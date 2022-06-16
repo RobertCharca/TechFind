@@ -11,10 +11,13 @@ class Usuario extends Eloquent
     protected $fillable = [
         'nombre',
         'apellidos',
-        'nombre_usuarios',
+        'username',
         'email',
         'password',
         'pais',
         'ciudad',
     ];
+    public function negocios(){
+        return $this->hasMany(Negocio::class,'usuario_id','_id');
+    }
 }

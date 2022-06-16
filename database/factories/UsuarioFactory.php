@@ -16,7 +16,7 @@ class UsuarioFactory extends Factory
         return [
             'nombre' => $this->faker->name(),
             'apellidos' => $this->faker->lastName(),
-            'nombre_usuarios' => $this->faker->userName(),
+            'username' => $this->faker->userName(),
             'email' => $this->faker->email(),
             'password' => $this->faker->password,
             'pais' => $this->faker->country(),

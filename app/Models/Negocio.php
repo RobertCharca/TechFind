@@ -22,4 +22,12 @@ class Negocio extends MongoModel
         'fecha_creacion',
         'fecha_actualizacion',
     ];
+
+    public function categorias(){
+        return $this->belongsTo(Categoria::class,'categoria_id','_id');
+    }
+
+    public function usuarios(){
+        return $this->belongsTo(Usuario::class,'usuario_id','_id');
+    }
 }
