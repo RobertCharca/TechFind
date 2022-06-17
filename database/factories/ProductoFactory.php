@@ -18,7 +18,7 @@ class ProductoFactory extends Factory
             'nombre_producto'=>$this->faker->name,
             'descripcion'=>$this->faker->text($maxNbChars = 200),
             'fecha_creacion'=>$this->faker->iso8601($max = 'now'),
-            'negocio_id'=>'62abca68a639000043003c52',
+            'negocio_id'=>'62ab74ce7b37cc4b590ea4a2',
         ];
     }
 }
