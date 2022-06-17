@@ -26,7 +26,7 @@
                 <td>{{$negocio->direccion}}</td>
                 <td>{{$negocio->ciudad}}, {{$negocio->pais}}</td>
                 <td>{{$negocio->correo_electronico}}</td>
-                <td>{{$negocio->usuarios->username}}</td>
+                <td>{{$negocio->usuarios}}</td>
                 <td>{{$negocio->categorias->nombre_categoria}}</td>
                 <td><a href="negocios/{{$negocio->_id}}/edit" type="button" class="btn btn-warning">Editar</a>
                     <a href="negocios/{{$negocio->_id}}/delete" type="button" class="btn btn-danger">Eliminar</a></td>

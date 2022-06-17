@@ -16,4 +16,7 @@ class Producto extends MongoModel
         'fecha_creacion',
         'negocio_id',
     ];
+    public function negocios(){
+        return $this->belongsTo(Negocio::class,'negocio_id','_id');
+    }
 }
