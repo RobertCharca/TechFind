@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Models\Negocio;
 
 class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::All();
+        $productos = Producto::with('negocios')->get();
         return view('producto.index')->with('productos', $productos);
     }
 
@@ -51,5 +52,9 @@ class ProductoController extends Controller
         $producto =Producto::find($id);
         $producto->delete();
         return redirect('/productos');
+    }
+    public function prueba(){
+        $productos=Producto::with('negocios')->get();
+        dd($productos);
     }
 }
