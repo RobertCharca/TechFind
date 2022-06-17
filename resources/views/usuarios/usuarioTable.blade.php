@@ -1,7 +1,8 @@
 @extends('layouts.usuarioPlantilla')
 @section('contenido')
-    <a href="usuario/agregarUsuario" type="button" class="btn btn-success">Nuevo Usuario</a>
-
+    <a href="usuario/agregarUsuario" type="button" class="btn btn-primary">Nuevo Usuario</a>
+    <a href="usuario/export" type="button" class="btn btn-success">Descargar en Excel</a>
+    <a href="{{ URL::to('/usuario/pdf') }}" type="button" class="btn btn-danger">Descargar en Pdf</a>
     <table class="table table-dark table-sm">
         <thead>
             <tr>
