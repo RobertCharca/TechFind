@@ -2,6 +2,8 @@
 @section('contenido')
     Productos
     <a href="productos/create" type="button" class="btn btn-success m-2">Nuevo Producto</a>
+    <a href="productos/export" type="button" class="btn btn-success m-2">Descargar Excel</a>
+    <a href="productos/exportPDF" type="button" class="btn btn-danger m-2">Descargar PDF</a>
     <table class="table table-dark table-striped">
         <thead>
         <tr>
@@ -19,7 +21,7 @@
                 <td> {{$producto->nombre_producto}}</td>
                 <td> {{$producto->descripcion}} </td>
                 <td>{{$producto->fecha_creacion}}</td>
-                <td>{{$producto->negocios->descripcion}}</td>
+                <td>{{$producto->negocios->nombre_negocio}}</td>
                 <td><a href="productos/{{$producto->_id}}/edit" type="button" class="btn btn-warning">Editar</a>
                     <a href="productos/{{$producto->_id}}/delete" type="button" class="btn btn-danger">Eliminar</a></td>
             </tr>

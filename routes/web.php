@@ -26,6 +26,8 @@ Route::post('/productos/insert', [App\Http\Controllers\ProductoController::class
 Route::get('/productos/{id}/edit', [App\Http\Controllers\ProductoController::class, 'edit']);
 Route::post('/productos/update/{id}', [App\Http\Controllers\ProductoController::class, 'update']);
 Route::get('/productos/{id}/delete', [App\Http\Controllers\ProductoController::class, 'delete']);
+Route::get('/productos/export/', [App\Http\Controllers\ProductoController::class, 'export']);
+Route::get('/productos/exportPDF/', [App\Http\Controllers\ProductoController::class, 'exportPDF']);
 
 Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index']);
 Route::get('categorias/create', [App\Http\Controllers\CategoriaController::class, 'create']);
