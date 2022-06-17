@@ -11,6 +11,7 @@ class Categoria extends MongoModel
     use HasFactory;
     protected $fillable = [
         'nombre_categoria',
+        'descripcion',
     ];
 
     public function negocios(){
