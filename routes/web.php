@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::post('/loginvue', [App\Http\Controllers\LoginController::class, 'login']);
 //Productos
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/productos', [App\Http\Controllers\ProductoController::class, 'index']);
