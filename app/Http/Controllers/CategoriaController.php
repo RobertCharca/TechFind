@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\ComentarioNegocio;
 
 class CategoriaController extends Controller
 {
@@ -51,6 +52,6 @@ class CategoriaController extends Controller
 
     public function prueba()
     {
-        return $negocios = Categoria::with('negocios')->get();
+        return $negocios = ComentarioNegocio::ALL();
     }
 }

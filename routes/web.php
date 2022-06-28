@@ -59,4 +59,4 @@ Route::post('/negocios/update/{id}', [App\Http\Controllers\NegocioController::cl
 Route::get('/negocios/{id}/delete', [App\Http\Controllers\NegocioController::class, 'delete']);
 Route::get('/negocios/export/', [App\Http\Controllers\NegocioController::class, 'export']);
 Route::get('/negocios/exportPDF/', [App\Http\Controllers\NegocioController::class, 'exportPDF']);
-
+Route::get('/negocios/vue', [App\Http\Controllers\NegocioController::class, 'negvue']);
