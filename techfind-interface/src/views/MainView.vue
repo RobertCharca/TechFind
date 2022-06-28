@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-content>
-            <v-container fluid fill-height>
+            <v-container fluid fill-height justify-center>
                 <v-flex xs12 sm3  v-for="bsn in negocios" :key="bsn._id">
                     <v-card
                         class="ml-5"
