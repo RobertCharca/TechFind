@@ -36,6 +36,15 @@
                         <v-list-item-title>{{ item.title }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+
+                <v-list-item style="margin-top: 20px">
+                    <v-btn
+                        color="#EF5350"
+                        dark
+                    >
+                        Cerrar sesion
+                    </v-btn>
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
         <v-app-bar
@@ -61,35 +70,17 @@
 
         </v-app-bar>
 
-        <v-main>
+        <v-main class="grey lighten-3">
             <router-view></router-view>
         </v-main>
 
-        <v-footer
-            color="primary lighten-1"
-            padless
-        >
-            <v-row
-                justify="center"
-                no-gutters
+        <v-footer dark padless>
+            <v-col
+                class="dark primary lighten-1 text-center"
+                cols="12"
             >
-                <v-btn
-                    v-for="link in links"
-                    :key="link"
-                    color="white"
-                    text
-                    rounded
-                    class="my-2"
-                >
-                    {{ link }}
-                </v-btn>
-                <v-col
-                    class="primary lighten-2 py-4 text-center white--text"
-                    cols="12"
-                >
-                    {{ new Date().getFullYear() }} — <strong>TechFind</strong>
-                </v-col>
-            </v-row>
+                {{ new Date().getFullYear() }} — <strong>TechFind</strong>
+            </v-col>
         </v-footer>
 
     </v-app>
@@ -106,7 +97,7 @@ export default {
             { title: 'Usuario', icon: 'mdi-account', to: '/user' },
             { title: 'Producto', icon: 'mdi-dots-square', to: '/producto' },
             { title: 'Catálogo', icon: 'mdi-format-list-bulleted-square', to: '/catalogo' },
-            { title: 'Login', icon: 'mdi-login', to: '/Login' }
+            { title: 'Login', icon: 'mdi-login', to: '/login' }
         ],
         links: [
             'Home',
