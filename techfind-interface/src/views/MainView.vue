@@ -11,7 +11,7 @@
                             :src="bsn.imagen_negocio"
                             height="200px"
                         ></v-img>
-                        <a href="/vendedor">
+                        <a @click="getesbsn(bsn._id)">
                             <v-card-title>
                                 {{ bsn.nombre_negocio }}
                             </v-card-title>
@@ -53,10 +53,10 @@
     </v-app>
 </template>
 <script>
-import axios from "axios";
+import router from "@/router";
 export default {
-    async mounted(){
-        const response = await axios.get('http://localhost:8000/negocios/vue');
+    async created(){
+        const response = await this.$http.get(this.url);
         this.negocios = response.data
     },
     data () {
@@ -69,7 +69,13 @@ export default {
             ],
             negocios: [],
             show: false,
+            url:"http://localhost:8000/negocios/vue"
         }
     },
+    methods:{
+        getesbsn (id){
+            router.push('/vendedor/'+id)
+        }
+    }
 }
 </script>

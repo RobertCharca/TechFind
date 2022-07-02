@@ -240,6 +240,7 @@
 
 <script>
 export default {
+
     data () {
         return {
             icons: [

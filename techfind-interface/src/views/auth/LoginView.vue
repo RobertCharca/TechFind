@@ -84,8 +84,10 @@ export default {
             //console.log(envio.data);
             this.snackbar = true;
             this.texto = envio.data.mensaje;
+            console.log(envio.data.usuario)
             if (envio.data.usuario) {
                 router.push('/user')
+                window.localStorage.setItem('user', JSON.stringify(envio.data.usuario))
             }
             else {
                 this.snackbar = true;

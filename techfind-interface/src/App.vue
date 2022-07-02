@@ -22,20 +22,35 @@
                 dense
                 nav
             >
-                <v-list-item
-                    v-for="item in items"
-                    :key="item.title"
-                    :to="item.to"
-                    link
-                >
-                    <v-list-item-icon>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-item-icon>
+                <template v-if="login == true">
+                    <v-list-item
+                        v-for="item in items"
+                        :key="item.title"
+                        :to="item.to"
+                        link
+                        @click="item.action"
+                    >
+                        <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
 
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                        <v-list-item-content>
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item
+                        @click="logout()"
+                    >
+                        <v-list-item-icon>
+                            <v-icon>mdi-power</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                            <v-list-item-title>logout</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </template>
+
             </v-list>
         </v-navigation-drawer>
         <v-app-bar
@@ -96,14 +111,23 @@
 </template>
 
 <script>
+import router from "@/router";
 export default {
+    created(){
+        if (window.localStorage.hasOwnProperty('user')){
+            this.login = true;
+            console.log('usuario autenticado')
+        }
+    },
     data: () => ({
         drawer: null,
+        login : false,
         items: [
             { title: 'Main Page', icon: 'mdi-view-dashboard', to: '/' },
             { title: 'Vendedor', icon: 'mdi-google-my-business', to: '/vendedor' },
             { title: 'Colaboradores', icon: 'mdi-account-group', to: '/colaboradores'  },
             { title: 'Usuario', icon: 'mdi-account', to: '/user' },
+            { title: 'Mis Negocios', icon: 'mdi-account', to: '/minegocio' },
             { title: 'Producto', icon: 'mdi-dots-square', to: '/producto' },
             { title: 'Catálogo', icon: 'mdi-format-list-bulleted-square', to: '/catalogo' },
             { title: 'Login', icon: 'mdi-login', to: '/Login' }
@@ -115,5 +139,14 @@ export default {
             'Contáctanos'
         ],
     }),
+    methods: {
+        logout () {
+            console.log("usuario deslogeado")
+            window.localStorage.removeItem('user')
+            this.login = false
+            router.push({ path: '/Login' });
+        },
+
+    }
 }
 </script>

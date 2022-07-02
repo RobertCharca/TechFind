@@ -51,7 +51,7 @@ class CategoriaController extends Controller
 
     public function prueba()
     {
-        $negocios = Categoria::with('negocios')->get();
-        dd($negocios);
+        $categorias = Categoria::get();
+        return $categorias;
     }
 }

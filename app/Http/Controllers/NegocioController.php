@@ -83,7 +83,48 @@ class NegocioController extends Controller
         $pdf = PDF::loadView('negocio.pdf',['negocios'=>$negocios]);
         return $pdf->download('negocios.pdf');
     }
-    public function negvue(){
-        return $negocios=Negocio::ALL();
+    public function negvue($id){
+        $negocios = Negocio::with('categorias', 'usuarios')->where('usuario_id',$id)->get();
+        return $negocios;
+    }
+    public function negvuemain(){
+        $negocios = Negocio::with('categorias', 'usuarios')->get();
+        return $negocios;
+    }
+    public function store(Request $request){
+        $negocio = new Negocio();
+
+        $negocio->nombre_negocio = $request->input('nombre');
+        $negocio->descripcion = $request->input('descripcion');
+        $negocio->hora_atencion = $request->input('hora_atencion');
+        $negocio->direccion = $request->input('direccion');
+        $negocio->categorias_id = $request->input('categoria_id');
+        $negocio->usuario_id = $request->input('usuario_id');
+        $negocio->save();
+        return '{"msg": "creado", "result": '.$negocio.'}';
+
+    }
+    public function destroy($_id){
+        $res = Negocio::destroy($_id);
+        return '{"id":"'.$_id.'","msg":"eliminado"}';
+    }
+    public function one($id){
+        $negocios = Negocio::with('categorias', 'usuarios')->where('_id',$id)->get();
+        return $negocios;
+    }
+    public function vueactua(Request $request)
+    {
+        $id = $request->input('_id');
+        $negocio = Negocio::where('_id',$id)
+        ->update([
+            'nombre_negocio' => $request->input('nombre'),
+            'descripcion' => $request->input('descripcion'),
+            'hora_atencion' => $request->input('hora_atencion'),
+            'direccion' => $request->input('direccion'),
+            'categoria_id' => $request->input('categoria_id'),
+            'usuario_id' => $request->input('usuario_id'),
+        ]);
+
+        return '{"msg":"actualizado"}';
     }
 }

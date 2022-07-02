@@ -8,7 +8,11 @@ Vue.use(VueRouter)
 const routes = [{
     path: '/',
     name: 'main',
-    component: main
+    component: main,
+    beforeEnter: (to, from, next) => {
+        if (window.localStorage.hasOwnProperty('user')) next()
+        else router.push({ path: '/Login' });
+    }
 
 },
 
@@ -19,16 +23,24 @@ const routes = [{
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../views/user/UserView.vue')
+            import ( /* webpackChunkName: "user" */ '../views/user/UserView.vue'),
+        beforeEnter: (to, from, next) => {
+            if (window.localStorage.hasOwnProperty('user')) next()
+            else router.push({ path: '/Login' });
+        }
     },
     {
-        path: '/vendedor',
+        path: '/vendedor/',
         name: 'vendedor',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../views/business/VendedorView.vue')
+            import ( /* webpackChunkName: "user" */ '../views/business/VendedorView.vue'),
+        beforeEnter: (to, from, next) => {
+            if (window.localStorage.hasOwnProperty('user')) next()
+            else router.push({ path: '/Login' });
+        }
     },
     {
         path: '/colaboradores',
@@ -37,7 +49,11 @@ const routes = [{
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../views/user/ColaboradoresView.vue')
+            import ( /* webpackChunkName: "user" */ '../views/user/ColaboradoresView.vue'),
+        beforeEnter: (to, from, next) => {
+            if (window.localStorage.hasOwnProperty('user')) next()
+            else router.push({ path: '/Login' });
+        }
     },
     {
         path: '/catalogo',
@@ -46,7 +62,11 @@ const routes = [{
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../views/business/CatalogoView.vue')
+            import ( /* webpackChunkName: "user" */ '../views/business/CatalogoView.vue'),
+        beforeEnter: (to, from, next) => {
+            if (window.localStorage.hasOwnProperty('user')) next()
+            else router.push({ path: '/Login' });
+        }
     },
     {
         path: '/producto',
@@ -55,7 +75,24 @@ const routes = [{
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../views/business/ProductoView.vue')
+            import ( /* webpackChunkName: "user" */ '../views/business/ProductoView.vue'),
+        beforeEnter: (to, from, next) => {
+            if (window.localStorage.hasOwnProperty('user')) next()
+            else router.push({ path: '/Login' });
+        }
+    },
+    {
+        path: '/minegocio',
+        name: 'MyBusiness',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+            import ( /* webpackChunkName: "user" */ '../views/user/MyBusiness.vue'),
+        beforeEnter: (to, from, next) => {
+            if (window.localStorage.hasOwnProperty('user')) next()
+            else router.push({ path: '/Login' });
+        }
     },
     {
         path: '/Login',
@@ -69,5 +106,7 @@ const routes = [{
 const router = new VueRouter({
     routes
 })
+//window.localStorage.removeItem('covid-user')
+
 
 export default router
