@@ -239,8 +239,12 @@
 </template>
 
 <script>
+import mainView from "@/views/MainView";
 export default {
-
+    created() {
+        console.log(mainView.data().viajero)
+        console.log('este es mi id negocio '+this.id_negocio)
+    },
     data () {
         return {
             icons: [
@@ -249,6 +253,7 @@ export default {
                 'mdi-linkedin',
                 'mdi-instagram',
             ],
+            id_negocio:'',
             rating: 4,
             items: [
                 {

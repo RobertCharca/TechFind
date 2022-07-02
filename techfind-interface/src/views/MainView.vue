@@ -69,12 +69,15 @@ export default {
             ],
             negocios: [],
             show: false,
-            url:"http://localhost:8000/negocios/vue"
+            url:"http://localhost:8000/negocios/vue",
+            viajero:'',
         }
     },
     methods:{
         getesbsn (id){
-            router.push('/vendedor/'+id)
+            this.viajero = id
+            console.log('viajero es este : '+this.viajero)
+            router.push('/vendedor');
         }
     }
 }
