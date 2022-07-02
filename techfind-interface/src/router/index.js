@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 //Pagina principal
-import main from '../views/MainView.vue'
+import Main from '../views/MainView'
 //Login y registro
-import Login from '../components/user/LoginComponent.vue'
-import Registro from '../components/user/RegisterComponent.vue'
+import Login from '../views/auth/LoginView.vue'
+import Registro from '../views/auth/RegisterView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [{
     path: '/',
-    name: 'main',
-    component: main
+    name: 'main-component',
+    component: Main
 
 },
 
@@ -19,26 +19,20 @@ const routes = [{
         path: '/user',
         name: 'user-component',
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../components/user/UserComponent'),
+            import ( /* webpackChunkName: "user" */ '../views/user/UserView.vue'),
         //Rutas anidadas
         children:[
-            {
-                path: 'general',
-                name: 'general-component',
-                component: () =>
-                    import('../components/user/profile/GeneralComponent.vue')
-            },
             {
                 path: 'posts',
                 name: 'publicacion-component',
                 component: () =>
-                    import('../components/user/profile/PublicacionesComponent.vue')
+                    import('../views/user/profile/PublicacionesView.vue')
             },
             {
                 path: 'photos',
                 name: 'fotos-component',
                 component: () =>
-                    import('../components/user/profile/FotosComponent.vue')
+                    import('../views/user/profile/FotosView.vue')
             },
         ]
     },
@@ -46,7 +40,7 @@ const routes = [{
         path: '/user/edit',
         name: 'useredit-component',
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../components/user/profile/EditarPerfilComponent.vue'),
+            import ( /* webpackChunkName: "user" */ '../views/user/profile/EditarPerfilView.vue'),
     },
     {
         path: '/vendedor',
@@ -61,13 +55,13 @@ const routes = [{
             import ( /* webpackChunkName: "user" */ '../views/user/ColaboradoresView.vue')
     },
     {
-        path: '/catalogo',
+        path: '/vendedor/catalogo',
         name: 'catalogo',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/CatalogoView.vue')
     },
     {
-        path: '/producto',
+        path: '/vendedor/catalogo/producto',
         name: 'producto',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/ProductoView.vue')

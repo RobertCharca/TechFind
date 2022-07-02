@@ -91,12 +91,10 @@ export default {
     data: () => ({
         drawer: null,
         items: [
-            { title: 'Main Page', icon: 'mdi-view-dashboard', to: '/' },
-            { title: 'Vendedor', icon: 'mdi-google-my-business', to: '/vendedor' },
-            { title: 'Colaboradores', icon: 'mdi-account-group', to: '/colaboradores'  },
+            { title: 'Principal', icon: 'mdi-home', to: '/' },
+            { title: 'Vendedores', icon: 'mdi-google-my-business', to: '/vendedor' },
+            { title: 'Mis negocios', icon: 'mdi-monitor-dashboard', to: '/colaboradores'  },
             { title: 'Usuario', icon: 'mdi-account', to: '/user' },
-            { title: 'Producto', icon: 'mdi-dots-square', to: '/producto' },
-            { title: 'Catálogo', icon: 'mdi-format-list-bulleted-square', to: '/catalogo' },
             { title: 'Login', icon: 'mdi-login', to: '/login' }
         ],
         links: [
