@@ -30,17 +30,6 @@
                                             <v-card-text class="mt-10">
                                                 <h1 class="text-center display-2 blue--text text--accent-3">Crear una cuenta</h1>
 
-                                                <!--Autenticacion con Google o Facebook-->
-                                                <div class="text-center mt-4">
-                                                    <v-btn class="mx-2" color="white" height="55px">
-                                                        <v-icon large color="blue-grey darken-1">mdi-facebook</v-icon>
-                                                    </v-btn>
-
-                                                    <v-btn class="mx-2" color="white" height="55px">
-                                                        <v-icon large color="blue-grey darken-1">mdi-google</v-icon>
-                                                    </v-btn>
-                                                </div>
-
                                                 <p class="text-center mt-4">Asegúrese de su correo electrónico para el registro</p>
 
                                                 <!--Formulario de registro-->
@@ -121,7 +110,7 @@
 
 <script>
 export default {
-    name: "RegisterComponent.vue",
+    name: "RegisterView",
     data: () => ({
         step: 1
     }),

@@ -107,7 +107,7 @@
 
 <script>
 export default {
-    name: "EditarPerfilComponent.vue",
+    name: "EditarPerfilView",
     props: {
         source: String,
     },
