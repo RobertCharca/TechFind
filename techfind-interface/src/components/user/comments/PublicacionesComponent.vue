@@ -22,7 +22,7 @@
                     >
                         <!--Nombre del negocio que el usuario ha comentado-->
                         <v-card-title class="text-h5 mb-3">
-                            <b><a href="/techfind-interface/public" style="text-decoration: none">Vendedor (link de pagina)</a></b>
+                            <b><a href="#/vendedor" style="text-decoration: none">Vendedor (link de pagina)</a></b>
                         </v-card-title>
 
                         <v-card-subtitle>
