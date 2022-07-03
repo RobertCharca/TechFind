@@ -7,7 +7,7 @@
         </v-col>
         <v-col>
             <v-card elevation="10">
-                <v-simple-table>
+                <v-simple-table fixed-header height="300px">
                     <template v-slot:default>
                         <thead>
                         <tr>
@@ -22,16 +22,16 @@
                         <tbody>
                         <tr
                             v-for="item in desserts"
-                            :key="item.name"
+                            :key="item._id"
                             class="pb-5"
                         >
                             <td class="pt-4 pb-5">
                                 <a href="#/vendedor" class="text-decoration-none black--text" style="font-size: 16px">
-                                    {{ item.name }}
+                                    {{ item.nombre_negocio }}
                                 </a>
                             </td>
                             <td class="pt-4 pb-5">
-                                {{ item.calories }}
+                                {{ item.total_rate }}
                             </td>
                         </tr>
                         </tbody>
@@ -43,32 +43,17 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+    async created() {
+        const response = await axios.get('http://127.0.0.1:5000/prueba')
+        //console.log(response.data) verifying the response showing it through console
+        this.desserts = response.data
+    },
     name: "RankingNegociosComponent",
     data () {
         return {
-            desserts: [
-                {
-                    name: 'Negocio 1: Samsung Store',
-                    calories: 5,
-                },
-                {
-                    name: 'Negocio 2: Nova Center',
-                    calories: 4.5,
-                },
-                {
-                    name: 'Negocio 3: Compu Plaza',
-                    calories: 4.4,
-                },
-                {
-                    name: 'Negocio 4: Xiaomi Store',
-                    calories: 4.3,
-                },
-                {
-                    name: 'Negocio 5: Mac Center',
-                    calories: 4.2,
-                },
-            ],
+            desserts: [],
         }
     },
 }

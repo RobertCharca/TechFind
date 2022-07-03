@@ -83,7 +83,8 @@ class NegocioController extends Controller
         $pdf = PDF::loadView('negocio.pdf',['negocios'=>$negocios]);
         return $pdf->download('negocios.pdf');
     }
-    public function negvue(){
-        return $negocios=Negocio::ALL();
+    public function api_negocios(){
+        $negocios = Negocio::with('categorias', 'usuarios','comentarios')->get();
+        return $negocios;
     }
 }

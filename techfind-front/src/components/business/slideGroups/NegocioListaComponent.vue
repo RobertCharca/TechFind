@@ -20,8 +20,8 @@
             show-arrows
         >
             <v-slide-item
-                v-for="n in 6"
-                :key="n"
+                v-for="item in business"
+                :key="item._id"
                 class="mb-5 mt-5"
             >
                 <!--Grupo de lista de los negocios-->
@@ -30,22 +30,19 @@
                     max-width="344"
                 >
                     <v-img
-                        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                        :src="item.imagen_negocio"
                         height="200px"
                     ></v-img>
 
                     <!--Titulo del negocio-->
                     <v-card-title >
-                        <a href="#/vendedor" style="text-decoration: none">Nombre del negocio</a>
+                        <a href="#/vendedor" style="text-decoration: none">{{item.nombre_negocio}}</a>
                     </v-card-title>
 
                     <!--Una parte de la descripcion del producto (si es posible implementarlo, se puede poner una pequeña
                     descripcion del producto como un campo mas a llenar)-->
                     <v-card-text>
-                        1,000 miles of wonder
-                        1,000 miles of wonder
-                        1,000 miles of wonder
-                        1,000 miles of wonder
+                        {{item.descripcion}}
                     </v-card-text>
 
                     <v-divider></v-divider>
@@ -61,7 +58,7 @@
                             label
                             text-color="white"
                         >
-                            Categoría
+                            {{item.categorias.nombre_categoria}}
                         </v-chip>
                     </div>
 
@@ -74,8 +71,19 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-    name: "NegocioListaComponente.vue"
+    async created() {
+        const rpta = await axios.get('http://127.0.0.1:5000/prueba')
+        //console.log(rpta.data[0]['categorias'])
+        this.business = rpta.data.slice(0, 5)
+    },
+    name: "NegocioListaComponente.vue",
+    data () {
+        return {
+            business: [],
+        }
+    },
 }
 </script>
 

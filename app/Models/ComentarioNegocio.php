@@ -14,4 +14,7 @@ class ComentarioNegocio extends Eloquent
         'texto_comentario',
         'imagen',
     ];
+    public function negocios(){
+        return $this->hasOne(Negocio::class,'negocio_id','_id');
+    }
 }

@@ -95,7 +95,13 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+    async created() {
+        //const rpta = await axios.get('http://127.0.0.1:8000/mybusiness')
+        //console.log(rpta.data[0]['categorias'])
+        //this.business = rpta.data.slice(0, 5)
+    },
     name: "MisNegociosComponent.vue",
     data () {
         return {
