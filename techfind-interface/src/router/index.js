@@ -56,12 +56,14 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/NegociosTodosView.vue')
     },
+    //Comentario de la pagina del vendedor
     {
         path: '/vendedor/postComment',
         name: 'vendedor-comentario-component',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/post/VendedorComentarioView.vue')
     },
+    //Pagina principal del CRUD de los negocios de un usuario
     {
         path: '/misNegocios',
         name: 'misnegocios-component',
@@ -81,6 +83,7 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/ProductoView.vue')
     },
+    //Comentario de la pagina del producto del vendedor
     {
         path: '/vendedor/catalogo/producto/postComment',
         name: 'producto-comentario-component',
