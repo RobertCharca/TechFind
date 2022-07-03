@@ -12,6 +12,21 @@
                             <!--Comentario del producto-->
                             <v-card-text>
                                 <h2 class="mt-5 mb-5">Deja tu comentario</h2>
+
+                                <!--Calificacion del producto-->
+                                <div class="text-left mt-5 mb-5">
+                                    <v-rating
+                                        v-model="rating"
+                                        color="yellow darken-3"
+                                        background-color="grey darken-1"
+                                        empty-icon="$ratingFull"
+                                        half-increments
+                                        hover
+                                        large
+                                    ></v-rating>
+                                </div>
+
+
                                 <v-form>
                                     <!--Titulo del comentario-->
                                     <v-text-field
@@ -65,6 +80,9 @@ export default {
     props: {
         source: String,
     },
+    data: () => ({
+        rating: 4.5,
+    }),
 }
 </script>
 
