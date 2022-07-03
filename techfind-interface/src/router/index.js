@@ -42,18 +42,33 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/user/profile/EditarPerfilView.vue'),
     },
+    //Todo sobre el vendedor
     {
         path: '/vendedor',
         name: 'vendedor',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/VendedorView.vue')
     },
+    //Todos los vendedores
     {
-        path: '/colaboradores',
-        name: 'colaboradores',
+        path: '/todosVendedor',
+        name: 'vendedor-todos-component',
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../views/user/ColaboradoresView.vue')
+            import ( /* webpackChunkName: "user" */ '../views/business/NegociosTodosView.vue')
     },
+    {
+        path: '/vendedor/postComment',
+        name: 'vendedor-comentario-component',
+        component: () =>
+            import ( /* webpackChunkName: "user" */ '../views/business/post/VendedorComentarioView.vue')
+    },
+    {
+        path: '/misNegocios',
+        name: 'misnegocios-component',
+        component: () =>
+            import ( /* webpackChunkName: "user" */ '../views/user/MisNegociosView.vue')
+    },
+    //Todos los productos del negocio
     {
         path: '/vendedor/catalogo',
         name: 'catalogo',
@@ -65,6 +80,31 @@ const routes = [{
         name: 'producto',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/ProductoView.vue')
+    },
+    {
+        path: '/vendedor/catalogo/producto/postComment',
+        name: 'producto-comentario-component',
+        component: () =>
+            import ( /* webpackChunkName: "user" */ '../views/business/post/ProductoComentario')
+    },
+    //CRUD de negocios y productos
+    {
+        path: '/misNegocios/create',
+        name: 'agregar-negocio-component',
+        component: () =>
+            import ( /* webpackChunkName: "user" */ '../views/user/postBusiness/MiNegocioCrearView.vue')
+    },
+    {
+        path: '/misNegocios/edit',
+        name: 'editar-negocio-component',
+        component: () =>
+            import ( /* webpackChunkName: "user" */ '../views/user/postBusiness/MiNegocioEditarView.vue')
+    },
+    {
+        path: '/misNegocios/createProduct',
+        name: 'agregar-producto-component',
+        component: () =>
+            import ( /* webpackChunkName: "user" */ '../views/user/postBusiness/MiNegocioCrearProductoView.vue')
     },
     //Login y registro de usuario
     {

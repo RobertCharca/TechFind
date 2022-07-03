@@ -92,8 +92,7 @@ export default {
         drawer: null,
         items: [
             { title: 'Principal', icon: 'mdi-home', to: '/' },
-            { title: 'Vendedores', icon: 'mdi-google-my-business', to: '/vendedor' },
-            { title: 'Mis negocios', icon: 'mdi-monitor-dashboard', to: '/colaboradores'  },
+            { title: 'Mis negocios', icon: 'mdi-monitor-dashboard', to: '/misNegocios'  },
             { title: 'Usuario', icon: 'mdi-account', to: '/user' },
             { title: 'Login', icon: 'mdi-login', to: '/login' }
         ],
