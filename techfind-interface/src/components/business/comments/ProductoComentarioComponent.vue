@@ -1,8 +1,20 @@
 <template>
     <v-container>
         <v-row style="margin-top: 15px">
-            <v-col>
-                <h1>Tus comentarios</h1>
+            <v-col class="d-flex justify-space-between align-center mb-2">
+                <h1>Comentarios</h1>
+
+                <!--Boton que sirve como publicacion de un comentario-->
+                <div class="my-2">
+                    <v-btn
+                        color="blue lighten-1"
+                        fab
+                        dark
+                        to="/vendedor/catalogo/producto/postComment"
+                    >
+                        <v-icon>mdi-comment-plus</v-icon>
+                    </v-btn>
+                </div>
             </v-col>
         </v-row>
 

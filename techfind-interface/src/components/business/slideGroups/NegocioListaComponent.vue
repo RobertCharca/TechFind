@@ -1,14 +1,14 @@
 <template>
-    <v-container>
-        <v-col class="d-flex justify-space-between">
-            <h1>Productos</h1>
+    <v-container fluid>
+        <v-col class="d-flex justify-space-between ">
+            <h1>Negocios</h1>
 
-            <!--Boton que sirve como link para el catalogo de productos-->
+            <!--Boton que sirve como link para el catalogo de negocios-->
             <div class="my-2">
                 <v-btn
                     color="primary"
                     dark
-                    to="/vendedor/catalogo"
+                    to="/todosVendedor"
                 >
                     Ver todo
                 </v-btn>
@@ -16,15 +16,15 @@
         </v-col>
 
         <v-slide-group
-            class="pa-0"
+            class="px-0"
             show-arrows
         >
             <v-slide-item
-                v-for="n in 10"
+                v-for="n in 6"
                 :key="n"
                 class="mb-5 mt-5"
             >
-                <!--Grupo de lista de los productos del negocio-->
+                <!--Grupo de lista de los negocios-->
                 <v-card
                     class="mr-5"
                     max-width="344"
@@ -34,9 +34,9 @@
                         height="200px"
                     ></v-img>
 
-                    <!--Titulo del producto-->
+                    <!--Titulo del negocio-->
                     <v-card-title >
-                        <a href="#/vendedor/catalogo/producto" style="text-decoration: none">Nombre del producto</a>
+                        <a href="#/vendedor" style="text-decoration: none">Nombre del negocio</a>
                     </v-card-title>
 
                     <!--Una parte de la descripcion del producto (si es posible implementarlo, se puede poner una pequeña
@@ -47,9 +47,29 @@
                         1,000 miles of wonder
                         1,000 miles of wonder
                     </v-card-text>
+
+                    <v-divider></v-divider>
+
+                    <!--Categoria del negocio-->
+                    <div class="d-flex align-center justify-start">
+                        <v-card-subtitle style="font-size: 15px">Categoría:</v-card-subtitle>
+
+                        <!--Texto de la categoria del negocio-->
+                        <v-chip
+                            class="ma-2"
+                            color="indigo accent-2"
+                            label
+                            text-color="white"
+                        >
+                            Categoría
+                        </v-chip>
+                    </div>
+
                 </v-card>
             </v-slide-item>
         </v-slide-group>
+
+
     </v-container>
 </template>
 
