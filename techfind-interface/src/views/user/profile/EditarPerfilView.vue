@@ -67,7 +67,7 @@
                                         label="Nombre de usuario"
                                         name="Username"
                                         prepend-icon="mdi-account-star"
-                                        type="password"
+                                        type="text"
                                         color="blue accent-3"
                                     />
                                     <v-text-field
@@ -75,7 +75,7 @@
                                         label="pais"
                                         name="País"
                                         prepend-icon="mdi-earth"
-                                        type="password"
+                                        type="text"
                                         color="blue accent-3"
                                     />
                                     <v-text-field
@@ -83,7 +83,7 @@
                                         label="Ciudad"
                                         name="Ciudad"
                                         prepend-icon="mdi-city"
-                                        type="password"
+                                        type="text"
                                         color="blue accent-3"
                                     />
                                 </v-form>
