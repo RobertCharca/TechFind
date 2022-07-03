@@ -76,7 +76,7 @@
                         </v-card>
                     </v-col>
 
-                    <!--Componente de comentario de producto (Para mas detalle ver el archivo ProductoComentarioComponent.vue en components)-->
+                    <!--Componente de comentario de producto (Para mas detalle ver el archivo ProductoComentarioPostComponent.vue en components)-->
                     <v-col>
                         <producto-comentario-component class="text-left"></producto-comentario-component>
                     </v-col>
