@@ -64,4 +64,4 @@ Route::get('/negocios/exportPDF/', [App\Http\Controllers\NegocioController::clas
 
 
 Route::get('/CommentsBsn', [App\Http\Controllers\NegocioController::class, 'api_negocios']);
-
+Route::get('/mybusiness/{id}', [App\Http\Controllers\NegocioController::class, 'from_user']);

@@ -87,4 +87,8 @@ class NegocioController extends Controller
         $negocios = Negocio::with('categorias', 'usuarios','comentarios')->get();
         return $negocios;
     }
+    public function from_user($id){
+        $negocios = Negocio::with('categorias', 'usuarios')->where('usuario_id',$id)->get();
+        return $negocios;
+    }
 }
