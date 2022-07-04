@@ -15,7 +15,8 @@ class ComentarioNegocioFactory extends Factory
     public function definition()
     {
         return [
-            'usuario' => "629ea89c8ca14f8f880a8712",
+            'usuario_id' => "629ea89c8ca14f8f880a8712",
+            'negocio_id' => "629ea89c8ca14f8f880a8712",
             'valoracion' => $this->faker->numberBetween(1,5),
             'texto_comentario' => $this->faker->realText,
             'imagen' => $this->faker->imageUrl,

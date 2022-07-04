@@ -128,7 +128,6 @@ class NegocioController extends Controller
     public function editar(Request $request,$id){
 
         $negocio =Negocio::find($id);
-
         $negocio->nombre_negocio = $request->input('nombre_negocio');
         $negocio->descripcion = $request->input('descripcion');
         $negocio->direccion = $request->input('direccion');

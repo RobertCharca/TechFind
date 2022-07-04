@@ -36,7 +36,7 @@
 
                     <!--Titulo del negocio-->
                     <v-card-title >
-                        <a href="#/vendedor" style="text-decoration: none">{{item.nombre_negocio}}</a>
+                        <a @click="more_info(item._id)" style="text-decoration: none">{{item.nombre_negocio}}</a>
                     </v-card-title>
 
                     <!--Una parte de la descripcion del producto (si es posible implementarlo, se puede poner una pequeña
@@ -72,6 +72,7 @@
 
 <script>
 import axios from 'axios';
+import router from "@/router";
 export default {
     async created() {
         const rpta = await axios.get('http://127.0.0.1:5000/prueba')
@@ -84,6 +85,11 @@ export default {
             business: [],
         }
     },
+    methods:{
+        more_info(id){
+            router.push('/vendedor/'+id)
+        }
+    }
 }
 </script>
 

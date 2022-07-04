@@ -55,7 +55,7 @@ const routes = [{
     },
     //Todo sobre el vendedor
     {
-        path: '/vendedor',
+        path: '/vendedor/:id',
         name: 'vendedor',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/VendedorView.vue'),
