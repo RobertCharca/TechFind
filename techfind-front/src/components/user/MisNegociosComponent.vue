@@ -22,7 +22,7 @@
                     <!--Tabla del CRUD de negocios del usuario-->
                     <v-simple-table
                         fixed-header
-                        height="300px"
+                        height="600px"
                     >
                         <template v-slot:default>
                             <thead>
@@ -43,11 +43,11 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="item in desserts"
-                                    :key="item.name"
+                                    v-for="item in mybsn"
+                                    :key="item._id"
                                 >
-                                    <td class="pt-3 pb-3">{{ item.name }}</td>
-                                    <td>Descripcion</td>
+                                    <td class="pt-3 pb-3">{{ item.nombre_negocio }}</td>
+                                    <td>{{item.descripcion}}</td>
                                     <td class="pt-3 pb-3">
                                         <div class="my-2 mr-5">
                                             <v-btn
@@ -68,7 +68,7 @@
                                                 <v-btn
                                                     color="success"
                                                     dark
-                                                    to="/misNegocios/edit"
+                                                    @click="editar(item._id)"
                                                 >
                                                     <v-icon>mdi-pencil</v-icon>
 
@@ -78,6 +78,7 @@
                                                 <v-btn
                                                     color="error"
                                                     dark
+                                                    @click="eliminar(item._id)"
                                                 >
                                                     <v-icon>mdi-delete</v-icon>
                                                 </v-btn>
@@ -96,28 +97,34 @@
 
 <script>
 import axios from 'axios';
+import router from "@/router";
 export default {
-    async created() {
-        //const rpta = await axios.get('http://127.0.0.1:8000/mybusiness')
-        //console.log(rpta.data[0]['categorias'])
-        //this.business = rpta.data.slice(0, 5)
+    async created(){
+        const user = JSON.parse(window.localStorage.getItem('user'))
+        //console.log('este es el '+user._id)
+        const response = await axios.get('http://localhost:8000/mybusiness/'+user._id);
+        this.mybsn = response.data
+        //console.log(this.mybsn)
+        /*
+        const rescat = await axios.get(this.caturl);
+        this.items = rescat.data;*/
+
     },
     name: "MisNegociosComponent.vue",
     data () {
         return {
-            desserts: [
-                {
-                    name: 'Frozen Yogurt',
-                },
-                {
-                    name: 'Ice cream sandwich',
-                },
-                {
-                    name: 'Eclair',
-                },
-            ],
+            mybsn : [],
         }
     },
+    methods:{
+        eliminar: async function (id){
+            const res = await axios.delete('http://localhost:8000/mybusiness/delete'+'/'+id)
+            this.mybsn=this.mybsn.filter(bsn=>bsn._id != res.data.id)
+        },
+        editar(id){
+            router.push('/misNegocios/edit/'+id)
+        }
+    }
 }
 </script>
 

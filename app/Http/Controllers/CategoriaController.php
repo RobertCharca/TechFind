@@ -54,4 +54,8 @@ class CategoriaController extends Controller
         $negocios = Categoria::with('negocios')->get();
         dd($negocios);
     }
+    public function allcategories(){
+        $categorias = Categoria::All();
+        return $categorias;
+    }
 }

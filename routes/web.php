@@ -41,6 +41,8 @@ Route::post('/categorias/update/{id}', [App\Http\Controllers\CategoriaController
 Route::get('/categorias/{id}/delete', [App\Http\Controllers\CategoriaController::class, 'delete']);
 Route::get('/categorias/prueba', [App\Http\Controllers\CategoriaController::class, 'prueba']);
 
+Route::get('/categories', [App\Http\Controllers\CategoriaController::class, 'allcategories']);
+
 //Usuario
 Route::get('/usuario', [App\Http\Controllers\UsuarioController::class, 'index']);
 Route::get('/usuario/agregarUsuario', [App\Http\Controllers\UsuarioController::class, 'agregarUsuario']);
@@ -65,3 +67,8 @@ Route::get('/negocios/exportPDF/', [App\Http\Controllers\NegocioController::clas
 
 Route::get('/CommentsBsn', [App\Http\Controllers\NegocioController::class, 'api_negocios']);
 Route::get('/mybusiness/{id}', [App\Http\Controllers\NegocioController::class, 'from_user']);
+Route::get('/mybusiness/one/{id}', [App\Http\Controllers\NegocioController::class, 'getonebsn']);
+Route::post('/mybusiness/edit/{id}', [App\Http\Controllers\NegocioController::class, 'editar']);
+Route::post('/business', [App\Http\Controllers\NegocioController::class, 'añadir']);
+Route::delete('/mybusiness/delete/{id}', [App\Http\Controllers\NegocioController::class, 'destroy']);
+

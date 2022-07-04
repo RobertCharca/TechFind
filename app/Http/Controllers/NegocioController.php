@@ -83,6 +83,14 @@ class NegocioController extends Controller
         $pdf = PDF::loadView('negocio.pdf',['negocios'=>$negocios]);
         return $pdf->download('negocios.pdf');
     }
+
+
+
+
+
+
+
+
     public function api_negocios(){
         $negocios = Negocio::with('categorias', 'usuarios','comentarios')->get();
         return $negocios;
@@ -91,4 +99,50 @@ class NegocioController extends Controller
         $negocios = Negocio::with('categorias', 'usuarios')->where('usuario_id',$id)->get();
         return $negocios;
     }
+    public function añadir(Request $request){
+        $negocio = new Negocio();
+
+        $negocio->usuario_id = $request->input('usuario_id');
+        $negocio->nombre_negocio = $request->input('nombre');
+        $negocio->correo_electronico = $request->input('email');
+        $negocio->descripcion = $request->input('descripcion');
+        $negocio->pais = $request->input('pais');
+        $negocio->ciudad = $request->input('ciudad');
+        $negocio->direccion = $request->input('direccion');
+        $negocio->categoria_id = $request->input('categoria_id');
+        $negocio->horario_1 = $request->input('horario_1');
+        $negocio->dias_1 = $request->input('dias_1');
+        $negocio->horario_2 = $request->input('horario_2');
+        $negocio->dias_2 = $request->input('dias_2');
+        $negocio->save();
+        return '{"msg": "creado", "result": '.$negocio.'}';
+    }
+    public function destroy($_id){
+        $res = Negocio::destroy($_id);
+        return '{"id":"'.$_id.'","msg":"eliminado"}';
+    }
+    public function getonebsn($id){
+        $negocios = Negocio::with('categorias', 'usuarios')->where('_id',$id)->get();
+        return $negocios;
+    }
+    public function editar(Request $request,$id){
+
+        $negocio =Negocio::find($id);
+
+        $negocio->nombre_negocio = $request->input('nombre_negocio');
+        $negocio->descripcion = $request->input('descripcion');
+        $negocio->direccion = $request->input('direccion');
+        $negocio->ciudad = $request->input('ciudad');
+        $negocio->pais = $request->input('pais');
+        $negocio->correo_electronico = $request->input('correo_electronico');
+        $negocio->categoria_id = $request->input('categoria_id');
+        $negocio->horario_1 = $request->input('horario_1');
+        $negocio->dias_1 = $request->input('dias_1');
+        $negocio->horario_2 = $request->input('horario_2');
+        $negocio->dias_2 = $request->input('dias_2');
+        $negocio->save();
+        return '{"msg":"actualizado"}';
+    }
+
+
 }

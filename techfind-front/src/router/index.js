@@ -141,7 +141,7 @@ const routes = [{
         }
     },
     {
-        path: '/misNegocios/edit',
+        path: '/misNegocios/edit/:id',
         name: 'editar-negocio-component',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/user/postBusiness/MiNegocioEditarView.vue'),
