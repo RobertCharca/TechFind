@@ -142,6 +142,4 @@ class NegocioController extends Controller
         $negocio->save();
         return '{"msg":"actualizado"}';
     }
-
-
 }

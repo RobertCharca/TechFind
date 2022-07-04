@@ -30,6 +30,7 @@
                                         item-text="nombre_categoria"
                                         item-value="_id"
                                     ></v-select>
+                                    <v-btn @click="consola">consola</v-btn>
                                     <v-text-field
                                         v-model="e_mail"
                                         id="Email"
@@ -177,6 +178,7 @@ export default {
         this.horario_2 = res.data[0].horario_2
         this.dias_2 = res.data[0].dias_2
         this.usuario_id = res.data[0].usuario_id
+        this.cat_id = res.data[0].categoria_id
 
     },
 
@@ -188,6 +190,7 @@ export default {
         //Just to show
         items:[],
         nombre_categoria:'',
+        cat_id:'',
         //To show and save
         negocio_id:'',
         nombre:'',
@@ -205,9 +208,12 @@ export default {
 
     }),
     methods:{
-        /*consola: function (){
+        consola: function (){
+            if (this.categoria_id == ''){
+                console.log('aqui estoy')
+            }
             console.log('es mi id de categoria: '+this.categoria_id)
-        },*/
+        },
         editando: async function(){
             const obj = new FormData()
             obj.append("_id",this.negocio_id)
@@ -217,6 +223,9 @@ export default {
             obj.append("ciudad",this.ciudad)
             obj.append("pais",this.pais)
             obj.append("correo_electronico",this.e_mail)
+            if (this.categoria_id == ''){
+                this.categoria_id = this.cat_id
+            }
             obj.append("categoria_id",this.categoria_id)
             obj.append("horario_1",this.horario_1)
             obj.append("dias_1",this.dias_1)
