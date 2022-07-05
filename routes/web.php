@@ -48,10 +48,14 @@ Route::post('/usuario/insertarUsuario', [App\Http\Controllers\UsuarioController:
 Route::get('/usuario/{id}/actualizarUsuario', [App\Http\Controllers\UsuarioController::class, 'actualizarUsuario']);
 Route::post('/usuario/updateUsuario/{id}', [App\Http\Controllers\UsuarioController::class, 'updateUsuario']);
 Route::get('/usuario/{id}/eliminarUsuario', [App\Http\Controllers\UsuarioController::class, 'eliminarUsuario']);
-
+Route::get('/usuario/vue/comentario_negocio/{id}', [App\Http\Controllers\UsuarioController::class, 'comments_business']);
+Route::get('/usuario/vue/comentario_producto/{id}', [App\Http\Controllers\UsuarioController::class, 'comments_products']);
+Route::get('/usuario/vue/one/{id}', [App\Http\Controllers\UsuarioController::class, 'getonebsn']);
+Route::post('/usuario/vue/edit/{id}', [App\Http\Controllers\UsuarioController::class, 'editar']);
 //Datos del usuario exportado en pdf y excel
 Route::get('usuario/export/', [App\Http\Controllers\UsuarioController::class, 'export']);
 Route::get('usuario/pdf/', [App\Http\Controllers\UsuarioController::class, 'createPDF']);
+Route::get('/userr', [App\Http\Controllers\UsuarioController::class, 'allUsers']);
 
 Route::get('/negocios', [App\Http\Controllers\NegocioController::class, 'index']);
 Route::get('/negocios/create', [App\Http\Controllers\NegocioController::class, 'create']);

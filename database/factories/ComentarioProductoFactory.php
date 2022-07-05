@@ -14,7 +14,8 @@ class ComentarioProductoFactory extends Factory
     public function definition()
     {
         return [
-            'usuario' => "629ea89c8ca14f8f880a8712",
+            'producto_id' => "62abcccf46130000780024e4",
+            'usuario_id' => "62c1eaac296c00007e004642",
             'valoracion' => $this->faker->numberBetween(1,5),
             'texto_comentario' => $this->faker->realText,
             'imagen' => $this->faker->imageUrl,

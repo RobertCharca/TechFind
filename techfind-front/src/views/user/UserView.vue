@@ -20,15 +20,15 @@
                     <v-col class="d-flex justify-center">
                         <div>
                             <div style="text-align: center">
-                                <h2>Usuario nuevo</h2>
-                                <p>usuario@gmail.com</p>
+                                <h2>{{this.nombre}}</h2>
+                                <p>{{this.email}}</p>
                             </div>
                             <div class="my-2">
                                 <v-btn
                                     color="primary"
                                     dark
                                     class="mr-3"
-                                    to="/user/edit"
+                                    @click="go"
                                 >
                                     Editar perfil
                                     <v-icon style="margin-left: 15px">mdi-account-edit</v-icon>
@@ -61,9 +61,40 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from "@/router";
 export default {
+    async created(){
+        const user = JSON.parse(window.localStorage.getItem('user'))
+        //console.log(user)
+        this.email=user.email
+        this.nombre=user.nombre
+        this._id=user._id
+        console.log(user._id)
+    },
+    name: "PublicacionesComponent",
     data: () => ({
-
+        _id:'',
+        rating: 4.5,
+        imagenes:{
+            "_id":3539457,
+            "nombre":'imagen.jpg',
+        },
+        email:'',
+        nombre:'',
+        
+                   
     }),
+
+    methods: {
+        go(){
+            router.push("/user/edit/"+this._id)
+        }
+    }
+
 }
 </script>
+
+<style scoped>
+
+</style>

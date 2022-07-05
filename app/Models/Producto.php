@@ -19,4 +19,7 @@ class Producto extends MongoModel
     public function negocios(){
         return $this->belongsTo(Negocio::class,'negocio_id','_id');
     }
+    public function comentario_producto(){
+        return $this->hasMany(ComentarioProducto::class,'producto_id','_id');
+    }
 }
