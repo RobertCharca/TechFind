@@ -26,4 +26,10 @@ class Usuario extends Eloquent
     public function com_negocios(){
         return $this->hasMany(ComentarioNegocio::class,'usuario_id','_id');
     }
+    public function comentario_productos(){
+        return $this->hasMany(ComentarioProducto::class,'usuario_id','_id');
+    }
+    public function comentario_negocios(){
+        return $this->hasMany(ComentarioNegocio::class,'usuario_id','_id');
+    }
 }

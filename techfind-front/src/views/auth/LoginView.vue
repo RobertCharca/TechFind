@@ -76,30 +76,38 @@
 <script>
 import axios from 'axios';
 import router from "@/router";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
     data () {
-      return{
-        step: 1,
-        formulario:{
-          email: null,
-          password: null,
-        },
-      }
+        return{
+            step: 1,
+            formulario:{
+                email: null,
+                password: null,
+            },
+        }
     },
     methods:{
-      async ingresar(){
-        const envio = await axios.post('http://localhost:8000/loginvue', this.formulario);
-        //console.log(envio.data);
-        //this.texto = envio.data.mensaje;
-        //console.log(envio.data.usuario) //es el retorno de la funcion de backend que vemos en la consola
-        if (envio.data.usuario) {
-          window.localStorage.setItem('user', JSON.stringify(envio.data.usuario))
-          router.push('/user')
+        ...mapMutations(["SET_NOMBRE_USUARIO"]),
+        ...mapMutations(["SET_EMAIL"]),
+        ...mapMutations(["SET_IMAGEN"]),
+        async ingresar(){
+            const envio = await axios.post('http://localhost:8000/loginvue', this.formulario);
+            //console.log(envio.data);
+            //this.texto = envio.data.mensaje;
+            //console.log(envio.data.usuario) //es el retorno de la funcion de backend que vemos en la consola
+            if (envio.data.usuario) {
+                window.localStorage.setItem('user', JSON.stringify(envio.data.usuario))
+                console.log(envio.data.usuario.nombre)
+                this.SET_NOMBRE_USUARIO(envio.data.usuario.nombre)
+                this.SET_EMAIL(envio.data.usuario.email)
+                this.SET_IMAGEN(envio.data.usuario.imagen)
+                router.push('/user')
+            }
+            else {
+                console.log(envio.data.mensaje)
+            }
         }
-        else {
-          console.log(envio.data.mensaje)
-        }
-      }
     },
     props: {
         source: String

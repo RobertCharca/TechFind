@@ -13,8 +13,8 @@
         >
             <v-row>
                 <v-col
-                    v-for="n in 3"
-                    :key="n"
+                    v-for="i in comentarios"
+                    :key="i._id"
                 >
                     <v-card
                         class="mx-auto"
@@ -22,22 +22,23 @@
                     >
                         <!--Nombre del negocio que el usuario ha comentado-->
                         <v-card-title class="text-h5 mb-3">
-                            <b><a href="#/vendedor" style="text-decoration: none">Vendedor (link de pagina)</a></b>
+                            <b><a @click="gobsn(i.negocio_id)" style="text-decoration: none">{{i.negocio.nombre_negocio}}</a></b>
                         </v-card-title>
 
                         <v-card-subtitle>
-                            <b>Usuario: </b> nombre de usuario
+                            <b>Usuario: </b> {{i.usuario.nombre}}
                         </v-card-subtitle>
 
                         <!--Calificacion del usuario-->
                         <v-card-text>
                             <div class="mb-5">
                                 <v-rating
-                                    v-model="rating"
+                                    v-model="i.valoracion"
                                     color="yellow darken-3"
                                     background-color="grey darken-1"
                                     empty-icon="$ratingFull"
                                     half-increments
+                                    readonly
                                     hover
                                     size="25"
                                 ></v-rating>
@@ -45,11 +46,9 @@
 
                             <!--Subtema y texto que escribio el usuario-->
                             <div>
-                                <h2 style="margin-bottom: 20px">Subtema del negocio</h2>
+                                <h2 style="margin-bottom: 20px">{{i.subtema}}</h2>
                                 <p>
-                                    If you enjoy using Vuetify, please take a few seconds to rate your experience with the framework. It really helps!
-                                    If you enjoy using Vuetify, please take a few seconds to rate your experience with the framework. It really helps!
-                                    If you enjoy using Vuetify, please take a few seconds to rate your experience with the framework. It really helps!
+                                    {{i.texto_comentario}}
                                 </p>
                             </div>
                         </v-card-text>
@@ -108,11 +107,21 @@
                 </v-col>
             </v-row>
         </v-responsive>
+
+
+
     </v-container>
 </template>
 
 <script>
+import axios from 'axios'
+import router from "@/router";
 export default {
+    async created(){
+        const user = JSON.parse(window.localStorage.getItem('user'))
+        const response = await axios.get(this.url+'/'+user._id);
+        this.comentarios = response.data
+    },
     name: "PublicacionesComponent",
     data: () => ({
         rating: 4.5,
@@ -120,10 +129,17 @@ export default {
             "_id":3539457,
             "nombre":'imagen.jpg',
         },
+        comentarios:[],
+        url: "http://localhost:8000/usuario/vue/comentario_negocio",
+
     }),
+    methods: {
+        gobsn(id){
+            router.push('/vendedor/'+id)
+        }
+    }
 }
 </script>
 
 <style scoped>
-
 </style>

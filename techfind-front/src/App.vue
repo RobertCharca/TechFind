@@ -65,7 +65,7 @@
 
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-            <v-app-bar-title>TechFind</v-app-bar-title>
+            <v-app-bar-title><a @click="main" class="white--text text-decoration-none bold">TechFind</a></v-app-bar-title>
 
             <v-spacer></v-spacer>
 
@@ -112,7 +112,9 @@ export default {
             this.login = false
             router.push({ path: '/login' });
         },
-
+        main (){
+            router.push('/')
+        }
     }
 }
 </script>

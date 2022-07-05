@@ -44,7 +44,7 @@ const routes = [{
         ]
     },
     {
-        path: '/user/edit',
+        path: '/user/edit/:id',
         name: 'useredit-component',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/user/profile/EditarPerfilView.vue'),

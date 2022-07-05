@@ -118,61 +118,59 @@ import router from "@/router";
 export default {
     name: "RegisterView",
     data () {
-      return{
-        step: 1,
-        nombre:'',
-        apellidos:'',
-        email:'',
-        password:'',
-        username:'',
-        pais:'',
-        ciudad:'',
-        formulario:{
-          email:null,
-          password:null
+        return{
+            step: 1,
+            nombre:'',
+            apellidos:'',
+            email:'',
+            password:'',
+            username:'',
+            pais:'',
+            ciudad:'',
+            formulario:{
+                email:null,
+                password:null
+            },
+            imagen:'https://ceslava.s3-accelerate.amazonaws.com/2016/04/mistery-man-gravatar-wordpress-avatar-persona-misteriosa-510x510.png'
         }
-      }
     },
     props: {
         source: String
     },
-  methods: {
-    validate: async function () {
-      const obj = new FormData()
-      obj.append("nombre",this.nombre)
-      obj.append("apellidos",this.apellidos)
-      obj.append("email",this.email)
-      obj.append("password",this.password)
-      obj.append("username",this.username)
-      obj.append("pais",this.pais)
-      obj.append("ciudad",this.ciudad)
-
-      //console.log('esta es cat id '+this.select)
-      console.log('estoy validando')
-      const res = await axios.post('http://localhost:8000/registrovue',obj)
-      console.log('terminde de registrar a mi usuario')
-      console.log(res.data)
-
-      //ingreso justo después del registro
-      this.formulario.email = res.data.result.email
-      this.formulario.password = res.data.result.password
-      //console.log("aqui esta el email bitches "+this.formulario.email)  //para comprobación
-
-      //realizando el login luego del registro
-      const envio = await axios.post('http://localhost:8000/loginvue', this.formulario);
-      console.log(envio.data.usuario) //es el retorno de la funcion de backend que vemos en la consola
-      if (envio.data.usuario) {
-        window.localStorage.setItem('user', JSON.stringify(envio.data.usuario))
-        router.push('/user')
-      }
-      else {
-        console.log(envio.data.mensaje)
-      }
-    },
-  }
+    methods: {
+        validate: async function () {
+            const obj = new FormData()
+            obj.append("nombre",this.nombre)
+            obj.append("apellidos",this.apellidos)
+            obj.append("email",this.email)
+            obj.append("password",this.password)
+            obj.append("username",this.username)
+            obj.append("pais",this.pais)
+            obj.append("ciudad",this.ciudad)
+            obj.append("imagen",this.imagen)
+            //console.log('esta es cat id '+this.select)
+            console.log('estoy validando')
+            const res = await axios.post('http://localhost:8000/registrovue',obj)
+            console.log('terminde de registrar a mi usuario')
+            console.log(res.data)
+            //ingreso justo después del registro
+            this.formulario.email = res.data.result.email
+            this.formulario.password = res.data.result.password
+            //console.log("aqui esta el email bitches "+this.formulario.email)  //para comprobación
+            //realizando el login luego del registro
+            const envio = await axios.post('http://localhost:8000/loginvue', this.formulario);
+            console.log(envio.data.usuario) //es el retorno de la funcion de backend que vemos en la consola
+            if (envio.data.usuario) {
+                window.localStorage.setItem('user', JSON.stringify(envio.data.usuario))
+                router.push('/user')
+            }
+            else {
+                console.log(envio.data.mensaje)
+            }
+        },
+    }
 }
 </script>
 
 <style scoped>
-
 </style>

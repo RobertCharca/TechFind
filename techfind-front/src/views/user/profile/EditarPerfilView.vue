@@ -14,7 +14,7 @@
                                 <v-col class="d-flex justify-center">
                                     <v-avatar size="100" rounded="lg" color="blue-grey lighten-3">
                                         <img
-                                            src="https://cdn.vuetifyjs.com/images/john.jpg"
+                                            :src="imagen"
                                             alt="John"
                                         >
                                     </v-avatar>
@@ -22,6 +22,7 @@
 
                                 <v-file-input
                                     :rules="rules"
+                                    v-model="imagen2"
                                     accept="image/png, image/jpeg, image/bmp"
                                     placeholder="Selecciona una imagen de perfil"
                                     prepend-icon="mdi-camera"
@@ -32,56 +33,63 @@
                                 <h2 class="mt-5 mb-5">Datos</h2>
                                 <v-form>
                                     <v-text-field
+                                        v-model="nombre"
                                         label="Nombre"
-                                        name="Name"
+
                                         prepend-icon="mdi-account-arrow-right"
                                         type="text"
                                         color="blue accent-3"
                                     />
                                     <v-text-field
+                                        v-model="apellidos"
                                         label="Apellidos"
-                                        name="surname"
+
                                         prepend-icon="mdi-account-arrow-right"
                                         type="text"
                                         color="blue accent-3"
                                     />
 
                                     <v-text-field
+                                        v-model="email"
                                         id="Email"
                                         label="Correo"
-                                        name="Email"
+
                                         prepend-icon="mdi-email"
                                         type="Email"
                                         color="blue accent-3"
                                     />
                                     <v-text-field
+                                        v-model="password"
                                         id="password"
                                         label="Contraseña"
-                                        name="password"
+
                                         prepend-icon="mdi-lock"
                                         type="password"
                                         color="blue accent-3"
                                     />
                                     <v-text-field
+                                        v-model="username"
                                         id="Username"
                                         label="Nombre de usuario"
-                                        name="Username"
+
                                         prepend-icon="mdi-account-star"
                                         type="text"
                                         color="blue accent-3"
                                     />
                                     <v-text-field
+                                        v-model="pais"
                                         id="pais"
                                         label="pais"
-                                        name="País"
+
                                         prepend-icon="mdi-earth"
                                         type="text"
                                         color="blue accent-3"
                                     />
                                     <v-text-field
+                                        v-model="ciudad"
                                         id="Ciudad"
                                         label="Ciudad"
-                                        name="Ciudad"
+
                                         prepend-icon="mdi-city"
                                         type="text"
                                         color="blue accent-3"
@@ -92,7 +100,7 @@
                                 <v-spacer></v-spacer>
                                 <v-layout>
                                     <v-flex justify-center>
-                                        <v-btn color="primary" to="/" class="mb-5 mr-5">Actualizar</v-btn>
+                                        <v-btn color="primary" @click="edit" class="mb-5 mr-5">Actualizar</v-btn>
                                         <v-btn dark color="red lighten-2" to="/user" class="mb-5">Cancelar</v-btn>
                                     </v-flex>
                                 </v-layout>
@@ -106,20 +114,80 @@
 </template>
 
 <script>
+import axios from "axios";
+import router from "@/router";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
-    name: "EditarPerfilView",
-    props: {
-        source: String,
+    async created() {
+
+        this._id = this.$route.params.id
+        const res = await axios.get('http://localhost:8000/usuario/vue/one/'+this._id)
+        //Filling the inputs with the information
+        console.log(this._id)
+        this.nombre = res.data[0].nombre
+        this.apellidos = res.data[0].apellidos
+        this.email = res.data[0].email
+        this.username = res.data[0].username
+        this.password = res.data[0].password
+        this.pais = res.data[0].pais
+        this.ciudad = res.data[0].ciudad
+        this.imagen = res.data[0].imagen
+        //console.log(user._id)
     },
+    name: "EditarPerfilView.vue",
+
     data: () => ({
         rules: [
             value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
         ],
+        //Just to show
+        items:[],
+        _id:'',
+        nombre:'',
+        //To show and save
+        apellidos:'',
+        email:'',
+        username:'',
+        password:'',
+        ciudad:'',
+        pais:'',
+        imagen:'',
+        imagen2:null
+    }),
+    methods:{
+        ...mapMutations(["SET_NOMBRE_USUARIO"]),
+        ...mapMutations(["SET_EMAIL"]),
+        ...mapMutations(["SET_IMAGEN"]),
 
-    })
+        consola: function (){
+            if (this._id == ''){
+                console.log('aqui estoy')
+            }
+            console.log('es mi id de categoria: '+this._id)
+        },
+        edit: async function(){
+            const res = await axios.get('http://localhost:8000/usuario/vue/one/'+this._id)
+            const obj = new FormData()
+            obj.append("_id",this._id)
+            obj.append("nombre",this.nombre)
+            obj.append("apellidos",this.apellidos)
+            obj.append("username",this.username)
+            obj.append("email",this.email)
+            obj.append("password",this.password)
+            obj.append("pais",this.pais)
+            obj.append("ciudad",this.ciudad)
+            obj.append("imagen",this.imagen2)
+            this.SET_NOMBRE_USUARIO(this.nombre)
+            this.SET_EMAIL(this.email)
+            this.SET_IMAGEN(this.imagen)
+            const response = await axios.post('http://localhost:8000/usuario/vue/edit/'+this._id,obj)
+            console.log(res.data)
+            console.log(this.imagen2)
+            router.push('/user')
+        }
+    }
 }
 </script>
 
 <style scoped>
-
 </style>

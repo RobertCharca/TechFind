@@ -7,6 +7,8 @@ use App\Models\Usuario;
 use App\Exports\UsuarioExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use App\Models\ComentarioNegocio;
+use App\Models\ComentarioProducto;
 
 class UsuarioController extends Controller
 {
@@ -74,6 +76,39 @@ class UsuarioController extends Controller
         ]);
         // download PDF file with download method
         return $pdf->download('usuarios.pdf');
+    }
+    public function comments_business($id){
+        $comentarios = ComentarioNegocio::with('usuario','negocio')->where('usuario_id',$id)->get();
+        return $comentarios;
+    }
+    public function comments_products($id){
+        $comentarios = ComentarioProducto::with('usuario','producto')->where('usuario_id',$id)->get();
+        return $comentarios;
+    }
+    public function getonebsn($id){
+        $usuarios = Usuario::where('_id',$id)->get();
+        return $usuarios;
+    }
+    public function editar(Request $request,$id){
+
+        $usuario =Usuario::find($id);
+        $usuario->nombre = $request->input('nombre');
+        $usuario->apellidos = $request->input('apellidos');
+        $usuario->username = $request->input('username');
+        $usuario->email = $request->input('email');
+        $usuario->password = $request->input('password');
+        $usuario->pais = $request->input('pais');
+        $usuario->ciudad = $request->input('ciudad');
+        $usuario->imagen = $request->input('imagen');
+        $file_name = time().'_'.$request->imagen->getClientOriginalName();
+        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
+        $usuario->imagen = "http://localhost:8000/storage/uploads/".$file_name;
+        $usuario->save();
+        return '{"msg":"actualizado"}';
+    }
+    public function allUsers(){
+        $usuarios = Usuario::all();
+        return $usuarios;
     }
 
 }

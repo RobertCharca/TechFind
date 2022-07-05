@@ -22,5 +22,10 @@ class ComentarioProducto extends Eloquent
     public function usuarios(){
         return $this->belongsTo(Usuario::class,'usuario_id','_id');
     }
-
+    public function usuario(){
+        return $this->belongsTo(Usuario::class,'usuario_id','_id');
+    }
+    public function producto(){
+        return $this->belongsTo(Producto::class,'producto_id','_id');
+    }
 }

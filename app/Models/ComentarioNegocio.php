@@ -22,4 +22,10 @@ class ComentarioNegocio extends Eloquent
     public function usuarios(){
         return $this->belongsTo(Usuario::class,'usuario_id','_id');
     }
+    public function usuario(){
+        return $this->belongsTo(Usuario::class,'usuario_id','_id');
+    }
+    public function negocio(){
+        return $this->belongsTo(Negocio::class,'negocio_id','_id');
+    }
 }
