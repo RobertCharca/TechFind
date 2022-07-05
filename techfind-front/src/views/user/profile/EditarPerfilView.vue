@@ -115,6 +115,7 @@
 <script>
 import axios from "axios";
 import router from "@/router";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
     async created() {
@@ -153,9 +154,12 @@ export default {
         password:'',
         ciudad:'',
         pais:'',
-
     }),
     methods:{
+
+        ...mapMutations(["SET_NOMBRE_USUARIO"]),
+        ...mapMutations(["SET_EMAIL"]),
+        
         consola: function (){
             if (this._id == ''){
                 console.log('aqui estoy')
@@ -164,6 +168,9 @@ export default {
         },
 
         edit: async function(){
+
+            const res = await axios.get('http://localhost:8000/usuario/vue/one/'+this._id)
+
             const obj = new FormData()
             obj.append("_id",this._id)
             obj.append("nombre",this.nombre)
@@ -173,8 +180,14 @@ export default {
             obj.append("password",this.password)
             obj.append("pais",this.pais)
             obj.append("ciudad",this.ciudad)
+
+            this.SET_NOMBRE_USUARIO(this.nombre)
+            this.SET_EMAIL(this.email)
+
             const response = await axios.post('http://localhost:8000/usuario/vue/edit/'+this._id,obj)
-            console.log(response.data)
+
+            console.log(res.data)
+
             router.push('/user')
         }
     }

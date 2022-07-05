@@ -76,6 +76,8 @@
 <script>
 import axios from 'axios';
 import router from "@/router";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+
 export default {
     data () {
       return{
@@ -87,6 +89,8 @@ export default {
       }
     },
     methods:{
+        ...mapMutations(["SET_NOMBRE_USUARIO"]),
+        ...mapMutations(["SET_EMAIL"]),
       async ingresar(){
         const envio = await axios.post('http://localhost:8000/loginvue', this.formulario);
         //console.log(envio.data);
@@ -94,6 +98,9 @@ export default {
         //console.log(envio.data.usuario) //es el retorno de la funcion de backend que vemos en la consola
         if (envio.data.usuario) {
           window.localStorage.setItem('user', JSON.stringify(envio.data.usuario))
+          console.log(envio.data.usuario.nombre)
+          this.SET_NOMBRE_USUARIO(envio.data.usuario.nombre)
+          this.SET_EMAIL(envio.data.usuario.email)
           router.push('/user')
         }
         else {

@@ -20,7 +20,7 @@
                     <v-col class="d-flex justify-center">
                         <div>
                             <div style="text-align: center">
-                                <h2>{{this.nombre}}</h2>
+                                <h2>{{this.nombre_usuario}}</h2>
                                 <p>{{this.email}}</p>
                             </div>
                             <div class="my-2">
@@ -63,15 +63,22 @@
 <script>
 import axios from 'axios'
 import router from "@/router";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
     async created(){
         const user = JSON.parse(window.localStorage.getItem('user'))
         //console.log(user)
-        this.email=user.email
+        this.emaiil=user.email
         this.nombre=user.nombre
         this._id=user._id
         console.log(user._id)
     },
+
+    computed: {
+        ...mapState(['nombre_usuario']),
+        ...mapState(['email'])
+    },
+
     name: "PublicacionesComponent",
     data: () => ({
         _id:'',
@@ -80,13 +87,14 @@ export default {
             "_id":3539457,
             "nombre":'imagen.jpg',
         },
-        email:'',
+        emaiil:'',
         nombre:'',
         
                    
     }),
 
     methods: {
+
         go(){
             router.push("/user/edit/"+this._id)
         }
