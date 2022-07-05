@@ -130,7 +130,8 @@ export default {
         formulario:{
           email:null,
           password:null
-        }
+        },
+        imagen:'https://ceslava.s3-accelerate.amazonaws.com/2016/04/mistery-man-gravatar-wordpress-avatar-persona-misteriosa-510x510.png'
       }
     },
     props: {
@@ -146,6 +147,7 @@ export default {
       obj.append("username",this.username)
       obj.append("pais",this.pais)
       obj.append("ciudad",this.ciudad)
+      obj.append("imagen",this.imagen)
 
       //console.log('esta es cat id '+this.select)
       console.log('estoy validando')

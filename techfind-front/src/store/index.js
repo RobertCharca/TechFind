@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     nombre_usuario: 'user',
-    email:'user@mail.com'
+    email:'user@mail.com',
+    imagen:'https://ceslava.s3-accelerate.amazonaws.com/2016/04/mistery-man-gravatar-wordpress-avatar-persona-misteriosa-510x510.png'
   },
   getters: {
   },
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     SET_EMAIL(state, email) {
       state.email = email;
+    },
+    SET_IMAGEN(state, imagen) {
+      state.imagen = imagen;
     },
   },
   actions: {

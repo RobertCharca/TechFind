@@ -14,7 +14,7 @@
                                 <v-col class="d-flex justify-center">
                                     <v-avatar size="100" rounded="lg" color="blue-grey lighten-3">
                                         <img
-                                            src="https://cdn.vuetifyjs.com/images/john.jpg"
+                                            :src="imagen"
                                             alt="John"
                                         >
                                     </v-avatar>
@@ -22,6 +22,7 @@
 
                                 <v-file-input
                                     :rules="rules"
+                                    v-model="imagen2"
                                     accept="image/png, image/jpeg, image/bmp"
                                     placeholder="Selecciona una imagen de perfil"
                                     prepend-icon="mdi-camera"
@@ -135,10 +136,14 @@ export default {
         this.password = res.data[0].password
         this.pais = res.data[0].pais
         this.ciudad = res.data[0].ciudad
+        this.imagen = res.data[0].imagen
         //console.log(user._id)
         },
 
     name: "EditarPerfilView.vue",
+
+    
+
     data: () => ({
         rules: [
             value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
@@ -154,11 +159,14 @@ export default {
         password:'',
         ciudad:'',
         pais:'',
+        imagen:'',
+        imagen2:null
     }),
     methods:{
 
         ...mapMutations(["SET_NOMBRE_USUARIO"]),
         ...mapMutations(["SET_EMAIL"]),
+        ...mapMutations(["SET_IMAGEN"]),
         
         consola: function (){
             if (this._id == ''){
@@ -180,14 +188,16 @@ export default {
             obj.append("password",this.password)
             obj.append("pais",this.pais)
             obj.append("ciudad",this.ciudad)
+            obj.append("imagen",this.imagen2)
 
             this.SET_NOMBRE_USUARIO(this.nombre)
             this.SET_EMAIL(this.email)
+            this.SET_IMAGEN(this.imagen)
 
             const response = await axios.post('http://localhost:8000/usuario/vue/edit/'+this._id,obj)
 
             console.log(res.data)
-
+            console.log(this.imagen2)
             router.push('/user')
         }
     }

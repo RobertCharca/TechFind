@@ -16,6 +16,7 @@ class Usuario extends Eloquent
         'password',
         'pais',
         'ciudad',
+        'imagen'
     ];
     public function negocios(){
         return $this->hasMany(Negocio::class,'usuario_id','_id');

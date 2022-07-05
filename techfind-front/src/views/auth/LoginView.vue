@@ -91,6 +91,7 @@ export default {
     methods:{
         ...mapMutations(["SET_NOMBRE_USUARIO"]),
         ...mapMutations(["SET_EMAIL"]),
+        ...mapMutations(["SET_IMAGEN"]),
       async ingresar(){
         const envio = await axios.post('http://localhost:8000/loginvue', this.formulario);
         //console.log(envio.data);
@@ -101,6 +102,7 @@ export default {
           console.log(envio.data.usuario.nombre)
           this.SET_NOMBRE_USUARIO(envio.data.usuario.nombre)
           this.SET_EMAIL(envio.data.usuario.email)
+          this.SET_IMAGEN(envio.data.usuario.imagen)
           router.push('/user')
         }
         else {

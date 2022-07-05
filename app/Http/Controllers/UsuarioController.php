@@ -99,6 +99,10 @@ class UsuarioController extends Controller
         $usuario->password = $request->input('password');
         $usuario->pais = $request->input('pais');
         $usuario->ciudad = $request->input('ciudad');
+        $usuario->imagen = $request->input('imagen');
+        $file_name = time().'_'.$request->imagen->getClientOriginalName();
+        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
+        $usuario->imagen = "http://localhost:8000/storage/uploads/".$file_name;
         $usuario->save();
         return '{"msg":"actualizado"}';
     }

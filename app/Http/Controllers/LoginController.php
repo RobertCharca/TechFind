@@ -34,6 +34,7 @@ class LoginController extends Controller
         $new_usuario->password = $request->input('password');
         $new_usuario->pais = $request->input('pais');
         $new_usuario->ciudad = $request->input('ciudad');
+        $new_usuario->imagen = $request->input('imagen');
 
         $new_usuario->save();
         return '{"msg":"usuario registrado", "result":'.$new_usuario.'}';
