@@ -123,6 +123,7 @@
                                     <!--Imagen del negocio-->
                                     <h3 class="mb-5">Imagen</h3>
                                     <v-file-input
+                                        v-model="imagen"
                                         :rules="rules"
                                         accept="image/png, image/jpeg, image/bmp"
                                         placeholder="Subir una imagen del negocio"
@@ -181,11 +182,16 @@ export default {
             dias_1:'',
             horario_2:'',
             dias_2:'',
+            imagen:null
         }
     },
     methods:{
         creando:async function(){
             const user = JSON.parse(window.localStorage.getItem('user'))
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
             const obj = new FormData()
             obj.append("usuario_id",user._id)
             obj.append("nombre",this.nombre)
@@ -199,9 +205,15 @@ export default {
             obj.append("dias_1",this.dias_1)
             obj.append("horario_2",this.horario_2)
             obj.append("dias_2",this.dias_2)
-            console.log('llego hasta aquí')
-            const res = await axios.post('http://localhost:8000/business',obj)
+            obj.append('imagen',this.imagen)
+
+            //console.log('llego hasta aquí')
+            const res = await axios.post('http://localhost:8000/business',obj,config)
+            console.log(res.data)
             router.push('/misNegocios')
+
+
+
         }
     }
 }

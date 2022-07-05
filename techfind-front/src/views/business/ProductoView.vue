@@ -4,7 +4,7 @@
         <!--Titulo del producto-->
         <v-row style="margin-top: 15px" class="align-center justify-center text-center px-5 py-5">
             <v-col>
-                <h3 style="font-size: 45px">Skytech Chronos Mini PC De Escritorio Para Juegos</h3>
+                <h3 style="font-size: 45px">{{productos.nombre_producto}}</h3>
             </v-col>
         </v-row>
 
@@ -45,16 +45,16 @@
                             <v-list two-line>
                                 <v-list-item>
                                     <v-list-item-content>
-                                        <v-list-item-title>Skytech Cronos Mini Pc</v-list-item-title>
-                                        <v-list-item-subtitle>Nombre negocio</v-list-item-subtitle>
+                                        <v-list-item-title>{{productos.nombre_producto}}</v-list-item-title>
+                                        <v-list-item-subtitle>{{productos.negocios.nombre_negocio}}</v-list-item-subtitle>
                                     </v-list-item-content>
-                                    <v-list-item-action>
+                                    <!--<v-list-item-action>
                                         <v-switch
                                             v-model="cycle"
                                             label="Diapositiva"
                                             inset
                                         ></v-switch>
-                                    </v-list-item-action>
+                                    </v-list-item-action>-->
                                 </v-list-item>
                             </v-list>
                         </v-card>
@@ -70,15 +70,14 @@
                             <v-divider></v-divider>
 
                             <p class="text-left ml-5 mr-5 mt-10">
-                                Procesador de CPU INTEL Core i3 10100F 3.6GHz (4.3GHz Max Boost) | SSD de 500 GB – Hasta 30 veces más rápido que el disco duro tradicional
-                                Tarjeta gráfica GTX 1650 de 4 GB GDDR6 (la marca puede variar) | Memoria para juegos DDR4 3200 de 16G con difusor de calor | Windows 10 Home de 64 bits
+                                {{productos.descripcion}}
                             </p>
                         </v-card>
                     </v-col>
 
                     <!--Componente de comentario de producto (Para mas detalle ver el archivo ProductoComentarioPostComponent.vue en components)-->
                     <v-col>
-                        <producto-comentario-component class="text-left"></producto-comentario-component>
+                        <producto-comentario-component :id_producto="$route.params.id" class="text-left" ></producto-comentario-component>
                     </v-col>
 
                 </v-row>
@@ -93,14 +92,25 @@
 <script>
 
 import ProductoComentarioComponent from "@/components/business/comments/ProductoComentarioComponent";
+import axios from "axios";
 
 export default {
+    async created() {
+        this.prod_id = this.$route.params.id
+        console.log('este es mi id de producto: '+this.prod_id)
+        const res = await axios.get('http://localhost:8000/products/one/'+this.prod_id)
+        this.productos = res.data[0]
+        this.items[0].src = this.productos.imagen
+        //console.log(this.productos.negocios.nombre_negocio)
+    },
     name:'Producto',
     components: {
         ProductoComentarioComponent
     },
     data () {
         return {
+            prod_id:'',
+            productos:[],
             icons: [
                 'mdi-facebook',
                 'mdi-twitter',
@@ -112,18 +122,6 @@ export default {
             items: [
                 {
                     src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                    to: '/'
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-                    to: '/'
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-                    to: '/'
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
                     to: '/'
                 },
             ],

@@ -72,3 +72,14 @@ Route::post('/mybusiness/edit/{id}', [App\Http\Controllers\NegocioController::cl
 Route::post('/business', [App\Http\Controllers\NegocioController::class, 'añadir']);
 Route::delete('/mybusiness/delete/{id}', [App\Http\Controllers\NegocioController::class, 'destroy']);
 
+Route::get('/business/comments/{id}', [App\Http\Controllers\NegocioController::class, 'pro_neg']);
+Route::post('/bsncomments', [App\Http\Controllers\NegocioController::class, 'post_com']);
+
+
+Route::get('/products/{id}', [App\Http\Controllers\ProductoController::class, 'pro_from_bsn']);
+Route::get('/products/one/{id}', [App\Http\Controllers\ProductoController::class, 'one_pro']);
+Route::post('/product', [App\Http\Controllers\ProductoController::class, 'agregar']);
+
+Route::get('/products/comments/{id}', [App\Http\Controllers\ProductoController::class, 'pro_com']);
+Route::get('/products/one/{id}', [App\Http\Controllers\ProductoController::class, 'one_pro']);
+Route::post('/procomments', [App\Http\Controllers\ProductoController::class, 'post_com']);

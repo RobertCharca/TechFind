@@ -53,7 +53,7 @@
                                             <v-btn
                                                 color="indigo lighten-2"
                                                 dark
-                                                to="/misNegocios/createProduct"
+                                                @click="agregar_producto(item._id)"
                                             >
                                                 Agregar
 
@@ -123,6 +123,9 @@ export default {
         },
         editar(id){
             router.push('/misNegocios/edit/'+id)
+        },
+        agregar_producto(id){
+            router.push("/misNegocios/createProduct/"+id)
         }
     }
 }

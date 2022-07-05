@@ -25,10 +25,10 @@
                                 <v-list-item three-line>
                                     <v-list-item-content>
                                         <h1 class="mb-5">
-                                            Nombre de negocio
+                                            {{negocio.nombre_negocio}}
                                         </h1>
                                         <p style="font-size: 20px">
-                                            Texto como descripcion del negocio.
+                                            {{negocio.descripcion}}
                                         </p>
                                     </v-list-item-content>
                                 </v-list-item>
@@ -52,11 +52,11 @@
                                 <v-row class="mb-6" no-gutters>
                                     <v-col sm="5" md="6" class="pl-2 pt-3">
                                         <v-card-title class="primary--text">
-                                            <h2>Lugar</h2>
+                                            <h2>{{negocio.ciudad}}, {{negocio.pais}}</h2>
                                         </v-card-title>
 
                                         <v-card-text style="font-size: 20px">
-                                            Av. Desonocida 315-H. En algun lugar de Arequipa.
+                                            {{negocio.direccion}}
                                         </v-card-text>
                                     </v-col>
 
@@ -86,16 +86,16 @@
 
                                 <!--Primer horario (lunes a viernes)-->
                                 <v-card-text style="font-size: 20px" class="pb-2">
-                                    7am - 9pm <br>
-                                    <p class="mt-2">Lunes a viernes</p>
+                                    {{negocio.horario_1}} <br>
+                                    <p class="mt-2">{{negocio.dias_1}}</p>
                                 </v-card-text>
 
                                 <v-divider></v-divider>
 
                                 <!--Segundo horario (sabado y domingo)-->
                                 <v-card-text style="font-size: 20px" class="pb-2">
-                                    7am - 11pm <br>
-                                    <p class="mt-2">Sabado y domingo</p>
+                                    {{negocio.horario_2}} <br>
+                                    <p class="mt-2">{{negocio.dias_2}}</p>
                                 </v-card-text>
                             </v-card>
                         </v-col>
@@ -103,7 +103,7 @@
 
                     <!--Productos-->
                     <v-row>
-                        <productos-lista-component></productos-lista-component>
+                        <productos-lista-component :id_negocio="$route.params.id"></productos-lista-component>
                     </v-row>
 
 
@@ -111,7 +111,7 @@
                     <!--Comentario sobre los negocios-->
                     <v-row class="mt-5 ">
                         <v-col>
-                            <negocio-comentario-component></negocio-comentario-component>
+                            <negocio-comentario-component :id_negocio="$route.params.id"></negocio-comentario-component>
                         </v-col>
                     </v-row>
 
@@ -126,13 +126,31 @@
 import GoogleMapsComponent from "@/components/business/location/GoogleMapsComponent";
 import NegocioComentarioComponent from "@/components/business/comments/NegocioComentarioComponent";
 import ProductosListaComponent from "@/components/business/slideGroups/ProductosListaComponent";
+import axios from "axios";
+
+
 
 export default {
+    async created() {
+        this.neg_id = this.$route.params.id
+        const res = await axios.get('http://localhost:8000/mybusiness/one/'+this.neg_id)
+        this.negocio = res.data[0]
+        console.log(this.negocio._id)
+    },
     name: 'App',
     components: {
         GoogleMapsComponent,
         NegocioComentarioComponent,
         ProductosListaComponent
+    },
+    data: () => ({
+        neg_id :'',
+        negocio:''
+    }),
+    methods:{
+        nuevo(){
+
+        }
     }
 }
 </script>

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\ComentarioNegocio;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Models\Negocio;
 use App\Exports\NegociosExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use App\Models\Producto;
+
 
 class NegocioController extends Controller
 {
@@ -102,6 +105,8 @@ class NegocioController extends Controller
     public function añadir(Request $request){
         $negocio = new Negocio();
 
+        $file_name = time().'_'.$request->imagen->getClientOriginalName();
+        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
         $negocio->usuario_id = $request->input('usuario_id');
         $negocio->nombre_negocio = $request->input('nombre');
         $negocio->correo_electronico = $request->input('email');
@@ -114,6 +119,7 @@ class NegocioController extends Controller
         $negocio->dias_1 = $request->input('dias_1');
         $negocio->horario_2 = $request->input('horario_2');
         $negocio->dias_2 = $request->input('dias_2');
+        $negocio->imagen_negocio = "http://localhost:8000/storage/uploads/".$file_name;
         $negocio->save();
         return '{"msg": "creado", "result": '.$negocio.'}';
     }
@@ -128,6 +134,8 @@ class NegocioController extends Controller
     public function editar(Request $request,$id){
 
         $negocio =Negocio::find($id);
+        $file_name = time().'_'.$request->imagen->getClientOriginalName();
+        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
         $negocio->nombre_negocio = $request->input('nombre_negocio');
         $negocio->descripcion = $request->input('descripcion');
         $negocio->direccion = $request->input('direccion');
@@ -139,7 +147,30 @@ class NegocioController extends Controller
         $negocio->dias_1 = $request->input('dias_1');
         $negocio->horario_2 = $request->input('horario_2');
         $negocio->dias_2 = $request->input('dias_2');
+        $negocio->imagen_negocio = "http://localhost:8000/storage/uploads/".$file_name;
         $negocio->save();
         return '{"msg":"actualizado"}';
+    }
+    public function pro_from_bsn($id){
+        $productos = Producto::where('negocio_id',$id)->get();
+        return $productos;
+    }
+    public function pro_neg($id){
+        $comentarios = ComentarioNegocio::with('usuarios')->where('negocio_id',$id)->get();
+        return $comentarios;
+    }
+    public function post_com(Request  $request){
+        $coment = new ComentarioNegocio();
+
+        $file_name = time().'_'.$request->imagen->getClientOriginalName();
+        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
+        $coment->usuario_id = $request->input('usuario_id');
+        $coment->negocio_id = $request->input('negocio_id');
+        $coment->subtema = $request->input('subtema');
+        $coment->valoracion = $request->input('valoracion');
+        $coment->texto_comentario = $request->input('descripcion');
+        $coment->imagen = "http://localhost:8000/storage/uploads/".$file_name;
+        $coment->save();
+        return '{"msg":"comentado"}';
     }
 }

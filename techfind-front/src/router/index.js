@@ -77,7 +77,7 @@ const routes = [{
     },
     //Comentario de la pagina del vendedor
     {
-        path: '/vendedor/postComment',
+        path: '/cortaneg/postComment/:id',
         name: 'vendedor-comentario-component',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/post/VendedorComentarioView.vue'),
@@ -99,7 +99,7 @@ const routes = [{
     },
     //Todos los productos del negocio
     {
-        path: '/vendedor/catalogo',
+        path: '/corta/catalogo/:id',
         name: 'catalogo',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/CatalogoView.vue'),
@@ -109,7 +109,7 @@ const routes = [{
         }
     },
     {
-        path: '/vendedor/catalogo/producto',
+        path: '/vendedor/catalogo/producto/:id',
         name: 'producto',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/business/ProductoView.vue'),
@@ -120,14 +120,10 @@ const routes = [{
     },
     //Comentario de la pagina del producto del vendedor
     {
-        path: '/vendedor/catalogo/producto/postComment',
+        path: '/corta/postComment/:id',
         name: 'producto-comentario-component',
         component: () =>
-            import ( /* webpackChunkName: "user" */ '../views/business/post/ProductoComentario'),
-        beforeEnter: (to, from, next) => {
-            if (window.localStorage.hasOwnProperty('user')) next()
-            else router.push({ path: '/login' });
-        }
+            import ( /* webpackChunkName: "user" */ '../views/business/post/ProductoComentario.vue'),
     },
     //CRUD de negocios y productos
     {
@@ -151,7 +147,7 @@ const routes = [{
         }
     },
     {
-        path: '/misNegocios/createProduct',
+        path: '/misNegocios/createProduct/:id',
         name: 'agregar-producto-component',
         component: () =>
             import ( /* webpackChunkName: "user" */ '../views/user/postBusiness/MiNegocioCrearProductoView.vue'),

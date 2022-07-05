@@ -10,7 +10,7 @@
                         color="blue lighten-1"
                         fab
                         dark
-                        to="/vendedor/postComment"
+                        @click="nuevo_neg($route.params.id)"
                     >
                         <v-icon>mdi-comment-plus</v-icon>
                     </v-btn>
@@ -25,8 +25,8 @@
         >
             <v-row>
                 <v-col
-                    v-for="n in 3"
-                    :key="n"
+                    v-for="item in com_negocios"
+                    :key="item._id"
                 >
                     <v-card
                         class="mx-auto"
@@ -37,38 +37,64 @@
                         <v-card-text>
                             <div class="mb-5">
                                 <v-rating
-                                    v-model="rating"
+                                    v-model="item.valoracion"
                                     color="yellow darken-3"
                                     background-color="grey darken-1"
                                     empty-icon="$ratingFull"
                                     half-increments
                                     hover
+                                    readonly
                                     size="25"
                                 ></v-rating>
                             </div>
 
                             <!--Subtema y texto que escribio el usuario-->
-                            <h2 style="margin-bottom: 20px">Subtema del negocio</h2>
+                            <h2 style="margin-bottom: 20px">{{item.subtema}}</h2>
                             <div style="font-size: 15px" class="mb-5">
-                                <b>Usuario: </b> nombre de usuario
+                                <b>Usuario: </b> {{item.usuarios.username}}
                             </div>
 
                             <!--Subtema y texto que escribio el usuario-->
                             <div>
                                 <p>
-                                    If you enjoy using Vuetify, please take a few seconds to rate your experience with the framework. It really helps!
-                                    If you enjoy using Vuetify, please take a few seconds to rate your experience with the framework. It really helps!
-                                    If you enjoy using Vuetify, please take a few seconds to rate your experience with the framework. It really helps!
+                                    {{item.texto_comentario}}
                                 </p>
                             </div>
                         </v-card-text>
 
                         <!--Imagen (imagenes) que haya publicado el usuario-->
                         <v-divider></v-divider>
+
                         <v-sheet
                             max-width="65vw"
                         >
-                            <template v-if="imagenes.count > 0">
+                            <template v-if="item.imagen != null">
+                            <v-slide-group
+                                class="pa-1"
+                                show-arrows
+                            >
+                                <v-slide-item
+                                    v-for="n in 1"
+                                    :key="n"
+                                    class="mb-5 mt-5"
+                                >
+                                    <v-img
+                                    :src="item.imagen"
+                                    aspect-ratio="1"
+                                    class="grey lighten-2 mr-5 ml-5"
+                                    height="200"
+                                    width="250"
+                                    style="border-radius: 5px"
+                                    ></v-img>
+                                    </v-slide-item>
+                                </v-slide-group>
+                            </template>
+                            <template v-else>
+                                <v-card-text>No hay imagenes.</v-card-text>
+                            </template>
+
+                            <!--
+                            <template v-if="cont > 0">
                                 <v-slide-group
                                     class="pa-1"
                                     show-arrows
@@ -79,9 +105,9 @@
                                         class="mb-5 mt-5"
                                     >
 
-                                        <!--Grupo de imagenes sin el uso de cards-->
+                                        Grupo de imagenes sin el uso de cards
                                         <a href="" target="_blank">
-                                            <!--Link de carga de imagen. Puede ser cambiada-->
+                                            Link de carga de imagen. Puede ser cambiada
                                             <v-img
                                                 :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
                                                 :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
@@ -107,11 +133,11 @@
                                         </a>
                                     </v-slide-item>
                                 </v-slide-group>
-                            </template>
+                            </template>-->
 
-                            <template v-else>
+                            <!--<template v-else>
                                 <v-card-text>No hay imagenes.</v-card-text>
-                            </template>
+                            </template>-->
                         </v-sheet>
                     </v-card>
                 </v-col>
@@ -122,7 +148,15 @@
 </template>
 
 <script>
+import router from "@/router";
+import axios from "axios";
 export default {
+    async created() {
+        const res = await axios.get('http://127.0.0.1:8000/business/comments/'+this.$route.params.id)
+        this.com_negocios = res.data
+        this.cont = this.imagenes.length
+        //console.log(this.com_negocios)
+    },
     name: "NegocioComentarioComponent.vue",
     data: () => ({
         rating: 4.5,
@@ -130,7 +164,14 @@ export default {
             "_id":3539457,
             "nombre":'imagen.jpg',
         },
+        cont:null,
+        com_negocios:[]
     }),
+    methods:{
+        nuevo_neg(id){
+            router.push('/cortaneg/postComment/'+id)
+        }
+    }
 }
 </script>
 

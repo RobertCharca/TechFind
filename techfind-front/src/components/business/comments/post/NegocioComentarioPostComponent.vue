@@ -29,6 +29,7 @@
                                 <v-form>
                                     <!--Titulo del comentario-->
                                     <v-text-field
+                                        v-model="subtema"
                                         counter
                                         maxlength="50"
                                         hint="Ingrese el título de su comentario"
@@ -36,6 +37,7 @@
                                     ></v-text-field>
                                     <!--Texto del comentario-->
                                     <v-textarea
+                                        v-model="descripcion"
                                         counter
                                         maxlength="250"
                                         label="Comentario"
@@ -47,11 +49,13 @@
                                     <!--Imagen del comentario del negocio-->
                                     <template>
                                         <v-file-input
-                                            show-size
-                                            counter
-                                            class="mt-5"
-                                            multiple
-                                            label="Imagen (opcional)"
+                                            v-model="imagen"
+                                            :rules="rules"
+                                            accept="image/png, image/jpeg, image/bmp"
+                                            placeholder="Subir una imagen del producto"
+                                            prepend-icon="mdi-image"
+                                            label="Subir una imagen del producto"
+                                            class="mb-6"
                                         ></v-file-input>
                                     </template>
 
@@ -61,8 +65,8 @@
                                 <v-spacer></v-spacer>
                                 <v-layout>
                                     <v-flex justify-center>
-                                        <v-btn color="primary" to="/vendedor" class="mb-5 mr-5">Publicar</v-btn>
-                                        <v-btn dark color="red lighten-2" to="/vendedor" class="mb-5">Cancelar</v-btn>
+                                        <v-btn color="primary" @click="publicar" class="mb-5 mr-5">Publicar</v-btn>
+                                        <v-btn dark color="red lighten-2" @click="regresar($route.params.id)" class="mb-5">Cancelar</v-btn>
                                     </v-flex>
                                 </v-layout>
                             </v-card-actions>
@@ -75,14 +79,50 @@
 </template>
 
 <script>
+
+import router from "@/router";
+import axios from "axios";
+
 export default {
+    created() {
+        console.log(this.$route.params.id)
+    },
     name: "NegocioComentarioPostComponent",
     props: {
         source: String,
     },
     data: () => ({
-        rating: 4.5,
+        rules: [
+            value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+        ],
+        rating: 0,
+        subtema:'',
+        descripcion:'',
+        imagen:null
     }),
+    methods:{
+        regresar(id){
+            router.push('/vendedor/'+id)
+        },
+        probar(){
+            console.log(this.rating)
+        },
+        publicar: async function(){
+            const user = JSON.parse(window.localStorage.getItem('user'))
+            const obj = new FormData()
+
+            obj.append("usuario_id",user._id)
+            obj.append("valoracion",this.rating)
+            obj.append("subtema",this.subtema)
+            obj.append("descripcion",this.descripcion)
+            obj.append("negocio_id",this.$route.params.id)
+            obj.append("imagen",this.imagen)
+
+            const res = await axios.post('http://127.0.0.1:8000/bsncomments',obj)
+            console.log(res.data)
+            router.push('/vendedor/'+this.$route.params.id)
+        }
+    }
 }
 </script>
 

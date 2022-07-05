@@ -14,6 +14,7 @@
                                 <h2 class="mt-5 mb-5">Datos del producto</h2>
                                 <v-form>
                                     <v-text-field
+                                        v-model="nombre"
                                         label="Nombre del producto"
                                         name="Name"
                                         prepend-icon="mdi-microsoft-xbox-controller"
@@ -21,6 +22,7 @@
                                         color="blue accent-3"
                                     />
                                     <v-textarea
+                                        v-model="descripcion"
                                         counter
                                         prepend-icon="mdi-card-text"
                                         maxlength="350"
@@ -33,6 +35,7 @@
                                     <!--Imagen del negocio-->
                                     <h3 class="mb-5">Imagen</h3>
                                     <v-file-input
+                                        v-model="imagen"
                                         :rules="rules"
                                         accept="image/png, image/jpeg, image/bmp"
                                         placeholder="Subir una imagen del producto"
@@ -40,16 +43,14 @@
                                         label="Subir una imagen del producto"
                                         class="mb-6"
                                     ></v-file-input>
-
-
                                 </v-form>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-layout>
                                     <v-flex justify-center>
-                                        <v-btn color="primary" to="/misNegocios" class="mb-5 mr-5">Agregar</v-btn>
-                                        <v-btn dark color="red lighten-2" to="/misNegocios" class="mb-5">Cancelar</v-btn>
+                                        <v-btn color="primary" @click="agregar" class="mb-5 mr-5">Agregar</v-btn>
+                                        <v-btn dark color="red lighten-2" @click="cancelar" class="mb-5">Cancelar</v-btn>
                                     </v-flex>
                                 </v-layout>
                             </v-card-actions>
@@ -62,14 +63,37 @@
 </template>
 
 <script>
+import router from "@/router";
+import axios from "axios";
+
 export default {
     name: "MiNegocioCrearProducto.vue",
     data: () => ({
         rules: [
             value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
         ],
+        nombre:'',
+        descripcion:'',
+        imagen:null
+    }),
+    methods:{
+        async agregar(){
+            const obj = new FormData()
+            //console.log('este es mi id de negocio'+this.$route.params.id)
+            obj.append("nombre_producto",this.nombre)
+            obj.append("descripcion",this.descripcion)
+            obj.append("negocio_id",this.$route.params.id)
+            obj.append("imagen",this.imagen)
 
-    })
+            const res = await axios.post('http://localhost:8000/product',obj)
+            console.log(res.data)
+            router.push('/misNegocios')
+
+        },
+        cancelar(){
+            router.push('/misNegocios')
+        }
+    }
 }
 </script>
 

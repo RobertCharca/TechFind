@@ -8,6 +8,7 @@ use App\Models\Negocio;
 use App\Exports\ProductosExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use App\Models\ComentarioProducto;
 
 class ProductoController extends Controller
 {
@@ -73,5 +74,46 @@ class ProductoController extends Controller
         $productos = Producto::with('negocios')->get();
         $pdf = PDF::loadView('producto.pdf',['productos'=>$productos]);
         return $pdf->download('productos.pdf');
+    }
+
+
+
+    public function pro_from_bsn($id){
+        $productos = Producto::where('negocio_id',$id)->get();
+        return $productos;
+    }
+    public function one_pro($id){
+        $productos = Producto::with('negocios')->where('_id',$id)->get();
+        return $productos;
+    }
+    public function pro_com($id){
+        $comentarios = ComentarioProducto::with('usuarios')->where('producto_id',$id)->get();
+        return $comentarios;
+    }
+    public function post_com(Request  $request){
+        $coment = new ComentarioProducto();
+        $file_name = time().'_'.$request->imagen->getClientOriginalName();
+        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
+        $coment->usuario_id = $request->input('usuario_id');
+        $coment->producto_id = $request->input('producto_id');
+        $coment->subtema = $request->input('subtema');
+        $coment->valoracion = $request->input('valoracion');
+        $coment->texto_comentario = $request->input('descripcion');
+        $coment->imagen = "http://localhost:8000/storage/uploads/".$file_name;
+        $coment->save();
+        return '{"msg":"actualizado"}';
+    }
+    public function agregar(Request $request){
+
+        $product = new Producto();
+
+        $file_name = time().'_'.$request->imagen->getClientOriginalName();
+        $file_path = $request->file('imagen')->storeAs('uploads', $file_name,'public');
+        $product->nombre_producto=$request->input('nombre_producto');
+        $product->descripcion=$request->input('descripcion');
+        $product->negocio_id=$request->input('negocio_id');
+        $product->imagen = "http://localhost:8000/storage/uploads/".$file_name;
+        $product->save();
+        return '{"msg":"añadido"}';
     }
 }

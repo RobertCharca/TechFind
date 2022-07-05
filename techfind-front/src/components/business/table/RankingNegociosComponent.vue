@@ -31,7 +31,7 @@
                                 </a>
                             </td>
                             <td class="pt-4 pb-5">
-                                {{ item.total_rate }}
+                                {{ item.total_rate }} ⭐
                             </td>
                         </tr>
                         </tbody>
@@ -48,7 +48,7 @@ export default {
     async created() {
         const response = await axios.get('http://127.0.0.1:5000/prueba')
         //console.log(response.data) verifying the response showing it through console
-        this.desserts = response.data
+        this.desserts = response.data.slice(0,5)
     },
     name: "RankingNegociosComponent",
     data () {

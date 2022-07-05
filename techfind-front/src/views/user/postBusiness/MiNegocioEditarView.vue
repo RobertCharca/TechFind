@@ -30,7 +30,6 @@
                                         item-text="nombre_categoria"
                                         item-value="_id"
                                     ></v-select>
-                                    <v-btn @click="consola">consola</v-btn>
                                     <v-text-field
                                         v-model="e_mail"
                                         id="Email"
@@ -125,6 +124,7 @@
                                     <!--Imagen del negocio-->
                                     <h3 class="mb-5">Imagen</h3>
                                     <v-file-input
+                                        v-model="imagen"
                                         :rules="rules"
                                         accept="image/png, image/jpeg, image/bmp"
                                         placeholder="Subir una imagen del negocio"
@@ -204,16 +204,11 @@ export default {
         dias_1:'',
         horario_2:'',
         dias_2:'',
-        usuario_id:''
+        usuario_id:'',
+        imagen:null
 
     }),
     methods:{
-        consola: function (){
-            if (this.categoria_id == ''){
-                console.log('aqui estoy')
-            }
-            console.log('es mi id de categoria: '+this.categoria_id)
-        },
         editando: async function(){
             const obj = new FormData()
             obj.append("_id",this.negocio_id)
@@ -232,6 +227,7 @@ export default {
             obj.append("horario_2",this.horario_2)
             obj.append("dias_2",this.dias_2)
             obj.append("usuario_id",this.usuario_id)
+            obj.append('imagen',this.imagen)
             const response = await axios.post('http://localhost:8000/mybusiness/edit/'+this.negocio_id,obj)
             console.log(response.data)
             router.push('/misNegocios')

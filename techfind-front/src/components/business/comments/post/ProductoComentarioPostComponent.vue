@@ -30,6 +30,7 @@
                                 <v-form>
                                     <!--Titulo del comentario-->
                                     <v-text-field
+                                        v-model="subtema"
                                         counter
                                         maxlength="50"
                                         hint="Ingrese el título de su comentario"
@@ -37,6 +38,7 @@
                                     ></v-text-field>
                                     <!--Texto del comentario-->
                                     <v-textarea
+                                        v-model="descripcion"
                                         counter
                                         maxlength="250"
                                         label="Comentario"
@@ -46,15 +48,15 @@
                                     <v-divider></v-divider>
 
                                     <!--Imagen del comentario del producto-->
-                                    <template>
-                                        <v-file-input
-                                            show-size
-                                            counter
-                                            class="mt-5"
-                                            multiple
-                                            label="Imagen (opcional)"
-                                        ></v-file-input>
-                                    </template>
+                                    <v-file-input
+                                        v-model="imagen"
+                                        :rules="rules"
+                                        accept="image/png, image/jpeg, image/bmp"
+                                        placeholder="Subir una imagen del producto"
+                                        prepend-icon="mdi-image"
+                                        label="Imagen"
+                                        class="mb-6"
+                                    ></v-file-input>
 
                                 </v-form>
                             </v-card-text>
@@ -62,8 +64,8 @@
                                 <v-spacer></v-spacer>
                                 <v-layout>
                                     <v-flex justify-center>
-                                        <v-btn color="primary" to="/vendedor/catalogo/producto" class="mb-5 mr-5">Publicar</v-btn>
-                                        <v-btn dark color="red lighten-2" to="/vendedor/catalogo/producto" class="mb-5">Cancelar</v-btn>
+                                        <v-btn color="primary" @click="publicar" class="mb-5 mr-5">Publicar</v-btn>
+                                        <v-btn dark color="red lighten-2" @click="cancelar($route.params.id)"  class="mb-5">Cancelar</v-btn>
                                     </v-flex>
                                 </v-layout>
                             </v-card-actions>
@@ -75,14 +77,39 @@
     </v-app>
 </template>
 <script>
+import router from "@/router";
+import axios from "axios";
 export default {
     name: "ProductoComentarioPostComponent",
     props: {
         source: String,
     },
     data: () => ({
-        rating: 4.5,
+        rating: 0,
+        subtema:'',
+        descripcion:'',
+        imagen:null
     }),
+    methods:{
+        cancelar(id){
+            router.push('/vendedor/catalogo/producto/'+id)
+        },
+        publicar: async function(){
+            const user = JSON.parse(window.localStorage.getItem('user'))
+            const obj = new FormData()
+
+            obj.append("usuario_id",user._id)
+            obj.append("valoracion",this.rating)
+            obj.append("subtema",this.subtema)
+            obj.append("descripcion",this.descripcion)
+            obj.append("producto_id",this.$route.params.id)
+            obj.append("imagen",this.imagen)
+
+            const res = await axios.post('http://127.0.0.1:8000/procomments',obj)
+            console.log(res.data)
+            router.push('/vendedor/catalogo/producto/'+this.$route.params.id)
+        }
+    }
 }
 </script>
 

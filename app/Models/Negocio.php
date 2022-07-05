@@ -33,4 +33,7 @@ class Negocio extends MongoModel
     public function comentarios(){
         return $this->hasMany(ComentarioNegocio::class,'negocio_id','_id');
     }
+    public function productos(){
+        return $this->hasMany(Producto::class,'negocio_id','_id');
+    }
 }
